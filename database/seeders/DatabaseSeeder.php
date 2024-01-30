@@ -66,22 +66,26 @@ class DatabaseSeeder extends Seeder
         for ($i = 1; $i <= 4; $i++) {
             Tier::insert([
                 [
-                    'description' => 'Tier 1 - $10',
+                    'name' => 'Tier 1',
+                    'description' => 'This is the first tier of donations. It is $10.',
                     'amount' => 10,
                     'charity_id' => $i,
                 ],
                 [
-                    'description' => 'Tier 2 - $20',
+                    'name' => 'Tier 2',
+                    'description' => 'This is the second tier of donations. It is $20.',
                     'amount' => 20,
                     'charity_id' => $i,
                 ],
                 [
-                    'description' => 'Tier 3- $50',
+                    'name' => 'Tier 3',
+                    'description' => 'This is the third tier of donations. It is $50.',
                     'amount' => 50,
                     'charity_id' => $i,
                 ],
                 [
-                    'description' => 'Tier 4 - $100',
+                    'name' => 'Tier 4',
+                    'description' => 'This is the fourth tier of donations. It is $100.',
                     'amount' => 100,
                     'charity_id' => $i,
                 ]

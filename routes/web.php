@@ -1,5 +1,8 @@
 <?php
 
+use App\Livewire\CharityView;
+use App\Livewire\Home;
+use App\Livewire\WishlistView;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+Route::get('/', Home::class)
+    ->name('home');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -22,5 +26,12 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+Route::get('wishlist', WishlistView::class)
+    ->middleware(['auth'])
+    ->name('wishlist');
+
+Route::get('charities/{id}', CharityView::class)
+    ->name('charity.show');
 
 require __DIR__.'/auth.php';

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tier extends Model
+class Wishlist extends Model
 {
     use HasFactory;
 
@@ -14,8 +14,13 @@ class Tier extends Model
         return $this->hasMany(WishlistItem::class);
     }
 
-    public function charity()
+    public function user()
     {
-        return $this->belongsTo(Charity::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function hasTier(Tier $tier)
+    {
+        return $this->wishlistItems->contains('tier_id', $tier->id);
     }
 }
