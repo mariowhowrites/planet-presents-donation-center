@@ -1,5 +1,5 @@
 <section class="flex flex-col items-center gap-4 font-sans max-h-fit py-4 w-4/5 mx-auto">
-    <h2 class="text-4xl my-8">{{ $charity->name }}</h2>
+    <h1 class="text-4xl my-8">{{ $charity->name }}</h1>
     <article class="grid grid-cols-1 md:grid-cols-2">
         <div>
             <img class="max-h-96 object-contain" src="{{ $charity->preview_image }}" alt="{{ $charity->name }}">

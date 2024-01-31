@@ -1,4 +1,4 @@
-<section id="home-main-content" class="flex items-center justify-center">
+<section id="home-main-content" class="flex items-center justify-center gap-4">
     <div class="w-3/5 flex flex-col items-center gap-8 py-8 mx-auto">
         <h1 class="text-center text-3xl">Planet Presents Donation Center</h1>
         <p class="">
