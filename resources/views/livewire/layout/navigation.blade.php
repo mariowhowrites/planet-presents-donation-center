@@ -24,11 +24,9 @@ $logout = function (Logout $logout) {
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    @auth
-                        <x-nav-link :href="route('wishlist')" :active="request()->routeIs('wishlist')" wire:navigate>
-                            {{ __('Your Wishlist') }}
-                        </x-nav-link>
-                    @endauth
+                    <x-nav-link :href="route('wishlist')" :active="request()->routeIs('wishlist')" wire:navigate>
+                        {{ __('Your Wishlist') }}
+                    </x-nav-link>
                 </div>
             </div>
 

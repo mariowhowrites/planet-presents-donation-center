@@ -12,14 +12,12 @@
                     <h2 class="text-4xl">{{ $tier->name }}</h2>
                     <p>{{ $tier->description }}</p>
                     <p>{{ $tier->price }}</p>
-                    @auth
-                        @if ($currentWishlist->hasTier($tier))
-                            <p>Currently in Wishlist!</p>
-                            <button wire:click="removeFromWishlist({{ $tier }})">Remove from Wishlist</button>
-                        @else
-                            <button wire:click="addToWishlist({{ $tier }})">Add to Wishlist</button>
-                        @endif
-                    @endauth
+                    @if ($currentWishlist->hasTier($tier))
+                        <p>Currently in Wishlist!</p>
+                        <button wire:click="removeFromWishlist({{ $tier }})">Remove from Wishlist</button>
+                    @else
+                        <button wire:click="addToWishlist({{ $tier }})">Add to Wishlist</button>
+                    @endif
                 </div>
             @endforeach
         </div>

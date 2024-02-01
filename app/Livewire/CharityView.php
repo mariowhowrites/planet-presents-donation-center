@@ -14,7 +14,7 @@ class CharityView extends Component
     public Wishlist $currentWishlist;
 
     #[On('wishlist-updated')]
-    public function wishlistUpdated($tierId)
+    public function wishlistUpdated()
     {
         $this->currentWishlist->refresh();
     }
@@ -23,13 +23,7 @@ class CharityView extends Component
     {
         $this->charity = Charity::findOrFail($id);
 
-        if (!auth()->check()) {
-            return;
-        }
-
-        $this->currentWishlist = Wishlist::firstOrCreate([
-            'user_id' => auth()->id(),
-        ]);
+        $this->currentWishlist = Wishlist::current();
     }
 
     public function render()
@@ -39,13 +33,7 @@ class CharityView extends Component
 
     public function addToWishlist(Tier $tier)
     {
-        $user = auth()->user();
-
-        $wishlist = Wishlist::firstorCreate([
-            'user_id' => $user->id,
-        ]);
-
-        $wishlist->wishlistItems()->firstOrCreate([
+        $this->currentWishlist->wishlistItems()->firstOrCreate([
             'tier_id' => $tier->id,
         ]);
 

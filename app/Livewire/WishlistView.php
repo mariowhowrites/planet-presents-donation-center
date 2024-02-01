@@ -11,9 +11,7 @@ class WishlistView extends Component
 
     public function mount()
     {
-        $wishlist = Wishlist::firstOrCreate([
-            'user_id' => auth()->id(),
-        ]);
+        $wishlist = Wishlist::current();
 
         $this->wishlist = $wishlist;
     }
