@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->text('session_id');
+            $table->string('status')->default('private');
             $table->text('description')->nullable();
         });
     }
