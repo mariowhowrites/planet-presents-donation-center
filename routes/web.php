@@ -33,4 +33,7 @@ Route::get('wishlist', WishlistView::class)
 Route::get('charities/{id}', CharityView::class)
     ->name('charity.show');
 
+Route::get('wishlists/{id}', WishlistView::class)
+    ->name('wishlist.show');
+
 require __DIR__.'/auth.php';

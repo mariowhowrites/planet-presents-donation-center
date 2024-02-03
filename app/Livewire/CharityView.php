@@ -42,13 +42,7 @@ class CharityView extends Component
 
     public function removeFromWishlist(Tier $tier)
     {
-        $user = auth()->user();
-
-        $wishlist = Wishlist::firstorCreate([
-            'user_id' => $user->id,
-        ]);
-
-        $wishlist->wishlistItems()->where('tier_id', $tier->id)->delete();
+        $this->currentWishlist->wishlistItems()->where('tier_id', $tier->id)->delete();
 
         $this->dispatch('wishlist-updated', $tier->id);
     }

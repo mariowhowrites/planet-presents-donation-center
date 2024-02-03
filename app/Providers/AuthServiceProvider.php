@@ -5,7 +5,9 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 
 use App\Models\Charity;
+use App\Models\Wishlist;
 use App\Policies\CharityPolicy;
+use App\Policies\WishlistPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -17,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Charity::class => CharityPolicy::class,
+        // Wishlist::class => WishlistPolicy::class,
     ];
 
     /**
