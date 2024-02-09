@@ -36,9 +36,15 @@ class Wishlist extends Model
             return auth()->user()->wishlist->first();
         }
 
-        return Wishlist::firstOrCreate([
-            'session_id' => session()->getId(),
-        ]);
+        return Wishlist::firstOrCreateFromSession();
+    }
+
+    public static function firstOrCreateFromSession()
+    {
+        return Wishlist::firstOrCreate(
+            ['session_id' => session()->getId()],
+            ['description' => 'Welcome to my wishlist! Read about some of my selected charities below, and please consider pledging your support. Thank you!']
+        );
     }
 
     public static function getFromSession()
@@ -47,5 +53,21 @@ class Wishlist extends Model
             'session_id',
             session()->getId(),
         );
+    }
+
+    public function getSelectedCharities()
+    {
+        return $this->wishlistItems->map(function ($item) {
+            return $item->tier->charity;
+        });
+    }
+
+    public function getSelectedTiersByCharity($charity_id)
+    {
+        return $this->wishlistItems->filter(function ($item) use ($charity_id) {
+            return $item->tier->charity_id == $charity_id;
+        })->map(function ($item) {
+            return $item->tier;
+        });
     }
 }

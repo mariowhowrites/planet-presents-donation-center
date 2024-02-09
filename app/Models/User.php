@@ -52,9 +52,7 @@ class User extends Authenticatable
     protected static function booted(): void
     {
         static::created(function(User $user) {
-            $wishlist_from_session = Wishlist::firstOrCreate([
-                'session_id' => session()->getId(),
-            ]);
+            $wishlist_from_session = Wishlist::firstOrCreateFromSession();
 
             $user->wishlist()->save($wishlist_from_session);
         });

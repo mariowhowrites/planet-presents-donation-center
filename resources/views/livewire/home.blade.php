@@ -1,6 +1,6 @@
-<section id="home-main-content" class="flex items-center justify-center gap-4">
-    <div class="w-3/5 flex flex-col items-center gap-8 py-8 mx-auto">
-        <h1 class="text-center text-3xl">Planet Presents Donation Center</h1>
+<section id="home-main-content" class="flex items-center justify-center gap-4 py-24 sm:py-32">
+    <div class="w-3/5 flex flex-col items-center gap-8 mx-auto">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Planet Presents Donation Center</h1>
         <p class="">
             This page is your home for finding unique and hard-working environmental nonprofits that will use your
             donations
