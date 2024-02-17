@@ -64,4 +64,9 @@ class WishlistView extends Component
 
         return $is_user_wishlist || $is_session_wishlist;
     }
+
+    public function beginPledge()
+    {
+        $this->dispatch('open-modal', 'pledge-modal');
+    }
 }

@@ -18,4 +18,9 @@ class Tier extends Model
     {
         return $this->belongsTo(Charity::class);
     }
+
+    public function humanReadableAmount()
+    {
+        return $this->amount == 0 ? 'Choose Your Own Amount' : '$' . $this->amount;
+    }
 }

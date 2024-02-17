@@ -22,8 +22,9 @@ class TiersRelationManager extends RelationManager
                     ->required()
                     ->label('Donation Amount')
                     ->numeric(),
+                Forms\Components\TextInput::make('name')
+                    ->required(),
                 Forms\Components\Textarea::make('description')
-                    ->required()
                     ->columnSpanFull(),
             ]);
     }

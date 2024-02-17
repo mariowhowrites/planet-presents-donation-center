@@ -81,7 +81,9 @@
                             @endforeach
                         </div> --}}
 
-                        <button wire:click="beginPledge">Donate</button>
+                        <x-primary-button class="mt-4" wire:click="$dispatch('open-modal', 'pledge-modal')">Donate</x-primary-button>
+
+                        <livewire:pledge-modal :charity="$charity" :wishlist="$wishlist"/>
                 </article>
             @endforeach
 
