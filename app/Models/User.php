@@ -63,6 +63,11 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->role === 'admin';
+        return true;
+    }
+
+    public function currentWishlist()
+    {
+        return $this->wishlist->first();
     }
 }

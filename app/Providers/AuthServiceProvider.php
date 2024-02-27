@@ -19,7 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Charity::class => CharityPolicy::class,
-        // Wishlist::class => WishlistPolicy::class,
+        Wishlist::class => WishlistPolicy::class,
     ];
 
     /**

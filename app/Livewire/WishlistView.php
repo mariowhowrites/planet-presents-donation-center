@@ -21,7 +21,7 @@ class WishlistView extends Component
 
         // if we've received an ID from the router, we're trying to visit a published wishlist.
         // if the wishlist is not published, we should redirect to the home page.
-        if ($id && $wishlist->status !== WishlistStatus::Published) {
+        if ($id && $wishlist->status !== WishlistStatus::Public) {
             return redirect()->to(route('home'));
         }
 
@@ -41,7 +41,7 @@ class WishlistView extends Component
 
     public function publishWishlist()
     {
-        $this->wishlist->status = WishlistStatus::Published;
+        $this->wishlist->status = WishlistStatus::Public;
 
         $this->wishlist->save();
 

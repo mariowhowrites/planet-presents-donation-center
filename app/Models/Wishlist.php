@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Enums\WishlistStatus;
+use App\Models\Traits\HasPledges;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 
 class Wishlist extends Model
 {
-    use HasFactory;
+    use HasFactory, HasPledges;
 
     protected $casts = [
         'status' => WishlistStatus::class
@@ -59,7 +60,7 @@ class Wishlist extends Model
     {
         return $this->wishlistItems->map(function ($item) {
             return $item->tier->charity;
-        });
+        })->unique();
     }
 
     public function getSelectedTiersByCharity($charity_id)

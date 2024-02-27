@@ -22,36 +22,59 @@
         @endif
     </article>
 </section> --}}
-<div class="bg-white py-24 sm:py-32">
+<div class="bg-white py-24 sm:py-32 grow">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-2xl text-center">
             <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                 {{ $this->canEditWishlist() ? 'Your Wishlist' : "Someone else's Wishlist" }}</h2>
-            <p class="mt-2 text-lg leading-8 text-gray-600">{{ $wishlist->description }}</p>
+            @if ($wishlist->wishlistItems->isEmpty())
+                <p class="mt-2 text-lg leading-8 text-gray-600">Your wishlist is empty! Find some causes to donate to by
+                    visiting our <a class="underline text-blue-600" href="{{ route('home') }}" wire:navigate>Charities</a>
+                    page</p>
+            @else
+                <p class="mt-2 text-lg leading-8 text-gray-600">{{ $wishlist->description }}</p>
+                @if ($this->canEditWishlist())
+                    <p class="mt-1 leading-8 text-gray-600">Wishlist Status: {{ $wishlist->status->value }}</p>
+                    @if ($wishlist->status == App\Enums\WishlistStatus::Private)
+                        <x-secondary-button wire:click="publishWishlist">Publish</x-secondary-button>
+                    @else
+                        <x-secondary-button wire:click="unpublishWishlist">Unpublish</x-secondary-button>
+                    @endif
+                    <a href="/admin/my-wishlist">
+                        <x-secondary-button>Edit Wishlist</x-secondary-button>
+                    </a>
+                @endif
+                @if ($wishlist->status == App\Enums\WishlistStatus::Public)
+                    <x-secondary-button
+                        x-on:click="navigator.clipboard.writeText('{{ route('wishlist.show', $wishlist->id) }}')"
+                        class="mt-4">
+                        Copy Wishlist Link
+                    </x-secondary-button>
+                @endif
+            @endif
         </div>
         <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             {{-- Wishlist items --}}
             @foreach ($wishlist->getSelectedCharities() as $charity)
-                <article class="flex flex-col items-start justify-between">
+                <article class="">
                     <div class="relative w-full">
-                        <img src="{{ $charity->preview_image }}"
-                            alt=""
+                        <img src="{{ asset($charity->preview_image) }}" alt=""
                             class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]">
                         <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
                     </div>
-                    <div class="max-w-xl">
+                    <h3 class="mt-10 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                        <a href="#" class="relative">
+                            <span class="absolute inset-0"></span>
+                            {{ $charity->name }}
+                        </a>
+                    </h3>
+                    <div class="max-w-xl flex-grow-1">
                         {{-- <div class="mt-8 flex items-center gap-x-4 text-xs">
                             <time datetime="2020-03-16" class="text-gray-500">Mar 16, 2020</time>
                             <a href="#"
                                 class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</a>
                         </div> --}}
-                        <div class="group relative mt-8">
-                            <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                                <a href="#">
-                                    <span class="absolute inset-0"></span>
-                                    {{ $charity->name }}
-                                </a>
-                            </h3>
+                        <div class="relative">
                             <p class="mt-5 text-sm leading-6 text-gray-600">
                                 {{ $charity->description }}
                             </p>
@@ -81,9 +104,10 @@
                             @endforeach
                         </div> --}}
 
-                        <x-primary-button class="mt-4" wire:click="$dispatch('open-modal', 'pledge-modal')">Donate</x-primary-button>
+                        <x-primary-button class="mt-4"
+                            wire:click="$dispatch('open-modal', 'pledge-modal-{{ $charity->id }}')">Donate</x-primary-button>
 
-                        <livewire:pledge-modal :charity="$charity" :wishlist="$wishlist"/>
+                        <livewire:pledge-modal :charity="$charity" :wishlist="$wishlist" />
                 </article>
             @endforeach
 

@@ -15,12 +15,18 @@ class PledgeModal extends Component
     // state
     public $name;
     public $message;
-    public $tier = 1;
+    public $tier_id;
+    public $amount = 0;
 
     protected $rules = [
         'name' => 'required',
-        'tier' => 'required',
+        'tier_id' => 'required',
     ];
+    
+    public function mount()
+    {
+        $this->tier_id = $this->wishlist->getSelectedTiersByCharity($this->charity->id)->first()->id;
+    }
 
     public function render()
     {
@@ -29,20 +35,27 @@ class PledgeModal extends Component
 
     public function createPledge()
     {
-        Log::info([
-            'message' => $this->message,
-            'tier' => $this->tier,
-            'wishlist' => $this->wishlist,
-        ]);
-
         $this->validate();
 
-        Pledge::create([
+        $this->wishlist->createPledge([
+            'name' => $this->name,
             'message' => $this->message,
-            'tier_id' => $this->tier,
-            'wishlist_id' => $this->wishlist->id,
+            'tier_id' => $this->tier_id,
+            'amount' => $this->shouldShowAmountInput() ? $this->amount : $this->tierAmount(),
         ]);
         
         redirect($this->charity->donation_url);
+    }
+
+    public function shouldShowAmountInput()
+    {
+        $selected_tier = $this->charity->tiers->firstWhere('id', $this->tier_id);
+
+        return $selected_tier->amount === 0;
+    }
+
+    public function tierAmount()
+    {
+        return $this->charity->tiers->firstWhere('id', $this->tier_id)->amount;
     }
 }

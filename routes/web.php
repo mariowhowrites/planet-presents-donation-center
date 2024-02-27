@@ -27,8 +27,8 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::get('wishlist', WishlistView::class)
-    ->name('wishlist');
+Route::get('my-wishlist', WishlistView::class)
+    ->name('my-wishlist');
 
 Route::get('charities/{id}', CharityView::class)
     ->name('charity.show');

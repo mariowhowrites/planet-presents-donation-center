@@ -46,4 +46,24 @@ class CharityView extends Component
 
         $this->dispatch('wishlist-updated', $tier->id);
     }
+
+    public function toggleFromWishlist(Tier $tier)
+    {
+        $this->currentWishlist->hasTier($tier)
+            ? $this->removeFromWishlist($tier)
+            : $this->addToWishlist($tier);
+    }
+
+    public function wishlistButtonText($tier)
+    {
+        return $this->currentWishlist->hasTier($tier) ? 'Remove from Wishlist' : 'Add to Wishlist';
+    }
+
+    public function tierButtonClasses($tier)
+    {
+        return [
+            'relative block cursor-pointer rounded-lg bg-white border border-gray-300 p-4 focus:outline-none',
+            'ring-2 ring-indigo-500' => $this->currentWishlist->hasTier($tier),
+        ];
+    }
 }

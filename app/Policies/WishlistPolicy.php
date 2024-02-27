@@ -14,7 +14,7 @@ class WishlistPolicy
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->role == 'admin';
     }
 
     /**
@@ -22,7 +22,7 @@ class WishlistPolicy
      */
     public function view(User $user, Wishlist $wishlist): bool
     {
-        return true;
+        return $user->currentWishlist()->id == $wishlist->id;
     }
 
     /**

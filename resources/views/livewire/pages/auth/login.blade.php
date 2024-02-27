@@ -24,6 +24,10 @@ $login = function () {
     );
 };
 
+$register = function () {
+    $this->redirect(route('register'), navigate: true);
+};
+
 ?>
 
 <div>
@@ -58,7 +62,7 @@ $login = function () {
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center gap-2 justify-end mt-4">
             @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}" wire:navigate>
                     {{ __('Forgot your password?') }}
@@ -70,4 +74,5 @@ $login = function () {
             </x-primary-button>
         </div>
     </form>
+
 </div>

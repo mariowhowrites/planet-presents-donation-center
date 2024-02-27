@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tier_id')->constrained()->cascadeOnDelete();
             $table->foreignId('wishlist_id')->constrained()->cascadeOnDelete();
+            $table->string('name');
             $table->text('message')->nullable();
             $table->unsignedFloat('amount')->nullable();
             $table->timestamps();
