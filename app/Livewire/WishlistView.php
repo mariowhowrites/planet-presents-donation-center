@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Enums\WishlistStatus;
 use App\Models\Wishlist;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
@@ -21,8 +22,14 @@ class WishlistView extends Component
 
         // if we've received an ID from the router, we're trying to visit a published wishlist.
         // if the wishlist is not published, we should redirect to the home page.
-        if ($id && $wishlist->status !== WishlistStatus::Public) {
-            return redirect()->to(route('home'));
+        // expect admins. admins can see
+        if ($id) {
+            try {
+                $this->authorize('view', $wishlist);
+            } catch (AuthorizationException $e) {
+                Log::info('User is not authorized to view wishlist');
+                return redirect()->to(route('home'));
+            }
         }
 
         $this->wishlist = $wishlist;

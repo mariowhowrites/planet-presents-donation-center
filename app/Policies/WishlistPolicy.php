@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\WishlistStatus;
 use App\Models\User;
 use App\Models\Wishlist;
 use Illuminate\Auth\Access\Response;
@@ -20,9 +21,23 @@ class WishlistPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Wishlist $wishlist): bool
+    public function view(?User $user, Wishlist $wishlist): bool
     {
-        return $user->currentWishlist()->id == $wishlist->id;
+        // return $user->currentWishlist()->id == $wishlist->id
+        //     || $user->role == 'admin'
+        //     || $wishlist->status == WishlistStatus::Public;
+
+        if ($wishlist->status == WishlistStatus::Public) {
+
+            return true;
+        }
+
+        if ($user !== null) {
+            return $user->currentWishlist()->id == $wishlist->id
+                || $user->role == 'admin';
+        }
+
+        return false;
     }
 
     /**
@@ -30,7 +45,7 @@ class WishlistPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return false;
     }
 
     /**
