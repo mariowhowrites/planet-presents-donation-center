@@ -1,6 +1,6 @@
 <section class="flex flex-col items-center gap-4 font-sans max-h-fit w-4/5 mx-auto">
     <div
-        class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:grid-rows-3 lg:gap-x-8 lg:px-8">
+        class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:grid-rows-2 lg:gap-x-8 lg:px-8">
         <!-- Product details -->
         <div class="lg:max-w-lg">
             <nav aria-label="Breadcrumb">
