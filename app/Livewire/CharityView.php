@@ -13,12 +13,6 @@ class CharityView extends Component
     public Charity $charity;
     public Wishlist $currentWishlist;
 
-    #[On('wishlist-updated')]
-    public function wishlistUpdated()
-    {
-        $this->currentWishlist->refresh();
-    }
-
     public function mount($id)
     {
         $this->charity = Charity::findOrFail($id);
@@ -37,14 +31,14 @@ class CharityView extends Component
             'tier_id' => $tier->id,
         ]);
 
-        $this->dispatch('wishlist-updated', $tier->id);
+        $this->currentWishlist->refresh();
     }
 
     public function removeFromWishlist(Tier $tier)
     {
         $this->currentWishlist->wishlistItems()->where('tier_id', $tier->id)->delete();
 
-        $this->dispatch('wishlist-updated', $tier->id);
+        $this->currentWishlist->refresh();
     }
 
     public function toggleFromWishlist(Tier $tier)
@@ -57,13 +51,5 @@ class CharityView extends Component
     public function wishlistButtonText($tier)
     {
         return $this->currentWishlist->hasTier($tier) ? 'Remove from Wishlist' : 'Add to Wishlist';
-    }
-
-    public function tierButtonClasses($tier)
-    {
-        return [
-            'relative block cursor-pointer rounded-lg bg-white border border-gray-300 p-4 focus:outline-none',
-            'ring-2 ring-indigo-500' => $this->currentWishlist->hasTier($tier),
-        ];
     }
 }

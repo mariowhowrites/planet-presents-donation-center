@@ -35,21 +35,22 @@
                 <p class="mt-2 text-lg leading-8 text-gray-600">{{ $wishlist->description }}</p>
                 @if ($this->canEditWishlist())
                     <p class="mt-1 leading-8 text-gray-600">Wishlist Status: {{ $wishlist->status->value }}</p>
-                    @if ($wishlist->status == App\Enums\WishlistStatus::Private)
-                        <x-secondary-button wire:click="publishWishlist">Publish</x-secondary-button>
-                    @else
-                        <x-secondary-button wire:click="unpublishWishlist">Unpublish</x-secondary-button>
-                    @endif
-                    <a href="/admin/my-wishlist">
-                        <x-secondary-button>Edit Wishlist</x-secondary-button>
-                    </a>
-                @endif
-                @if ($wishlist->status == App\Enums\WishlistStatus::Public)
-                    <x-secondary-button
-                        x-on:click="navigator.clipboard.writeText('{{ route('wishlist.show', $wishlist->id) }}')"
-                        class="mt-4">
-                        Copy Wishlist Link
-                    </x-secondary-button>
+                    <fieldset id="wishlist-controls" class="flex flex-col items-center gap-2">
+                        @if ($wishlist->status == App\Enums\WishlistStatus::Private)
+                            <x-secondary-button wire:click="publishWishlist">Publish</x-secondary-button>
+                        @else
+                            <x-secondary-button wire:click="unpublishWishlist">Unpublish</x-secondary-button>
+                        @endif
+                        <a href="/admin/my-wishlist">
+                            <x-secondary-button>Edit Wishlist</x-secondary-button>
+                        </a>
+                        @if ($wishlist->status == App\Enums\WishlistStatus::Public)
+                            <x-secondary-button
+                                x-on:click="navigator.clipboard.writeText('{{ route('wishlist.show', $wishlist->id) }}')">
+                                Copy Wishlist Link
+                            </x-secondary-button>
+                        @endif
+                    </fieldset>
                 @endif
             @endif
         </div>
@@ -63,7 +64,7 @@
                         <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
                     </div>
                     <h3 class="mt-10 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                        <a href="#" class="relative">
+                        <a href="{{ route('charity.show', $charity->id) }}" class="relative">
                             <span class="absolute inset-0"></span>
                             {{ $charity->name }}
                         </a>

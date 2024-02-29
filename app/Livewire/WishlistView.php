@@ -35,12 +35,6 @@ class WishlistView extends Component
         $this->wishlist = $wishlist;
     }
 
-    #[On('wishlist-updated.{wishlist.id}')]
-    public function refreshWishlist()
-    {
-        $this->wishlist->refresh();
-    }
-
     public function render()
     {
         return view('livewire.wishlist-view');
@@ -52,7 +46,7 @@ class WishlistView extends Component
 
         $this->wishlist->save();
 
-        $this->dispatch('wishlist-updated', $this->wishlist->id);
+        $this->wishlist->refresh();
     }
 
     public function unpublishWishlist()
@@ -61,7 +55,7 @@ class WishlistView extends Component
 
         $this->wishlist->save();
 
-        $this->dispatch('wishlist-updated', $this->wishlist->id);
+        $this->wishlist->refresh();
     }
 
     public function canEditWishlist()

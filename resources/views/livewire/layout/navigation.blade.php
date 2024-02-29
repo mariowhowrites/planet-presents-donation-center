@@ -108,11 +108,11 @@ $logout = function (Logout $logout) {
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
                 @auth
-                    <div class="font-medium text-base text-gray-800" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"
+                    <div class="font-medium text-base text-white" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"
                         x-on:profile-updated.window="name = $event.detail.name"></div>
                     <div class="font-medium text-sm text-gray-500">{{ auth()->user()->email }}</div>
                 @else
-                    <div class="font-medium text-base text-gray-800">{{ __('Guest') }}</div>
+                    <div class="font-medium text-base text-white">{{ __('Guest') }}</div>
                 @endauth
             </div>
 
