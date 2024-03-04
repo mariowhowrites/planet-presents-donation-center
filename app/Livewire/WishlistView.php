@@ -16,6 +16,12 @@ class WishlistView extends Component
 
     public Wishlist $wishlist;
 
+    public bool $isEditingName = false;
+    public bool $isEditingDescription = false; 
+    public string $newName = '';
+    public string $newDescription = '';
+
+
     public function mount($id = null)
     {
         $wishlist = $id ? Wishlist::find($id) : Wishlist::current();
@@ -33,6 +39,8 @@ class WishlistView extends Component
         }
 
         $this->wishlist = $wishlist;
+        $this->newName = $wishlist->name;
+        $this->newDescription = $wishlist->description;
     }
 
     public function render()
@@ -69,5 +77,54 @@ class WishlistView extends Component
     public function beginPledge()
     {
         $this->dispatch('open-modal', 'pledge-modal');
+    }
+
+    public function toggleEditingName()
+    {
+        $this->isEditingName = !$this->isEditingName;
+    }
+
+    public function startEditingDescription()
+    {
+        $this->isEditingDescription = true;
+    }
+
+    public function startEditingName()
+    {
+        $this->isEditingName = true;
+    }
+
+    public function stopEditingName()
+    {
+        $validated = $this->validate([
+            'newName' => 'required|string|max:255',
+        ]);
+
+        if ($validated) {
+            $this->wishlist->update([
+                'name' => $validated['newName'],
+            ]);
+
+            $this->wishlist->refresh();
+        }
+
+        $this->isEditingName = false;
+    }
+
+    public function stopEditingDescription()
+    {
+        $validated = $this->validate([
+            'newDescription' => 'required|string',
+        ]);
+
+        if ($validated) {
+            $this->wishlist->update([
+                'description' => $validated['newDescription'],
+            ]);
+            
+            $this->wishlist->refresh();
+        }
+
+        $this->isEditingDescription = false;
     }
 }

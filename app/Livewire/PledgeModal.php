@@ -58,4 +58,9 @@ class PledgeModal extends Component
     {
         return $this->charity->tiers->firstWhere('id', $this->tier_id)->amount;
     }
+
+    public function selectTier($tier_id)
+    {
+        $this->tier_id = $tier_id;
+    }
 }
