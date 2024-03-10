@@ -23,11 +23,9 @@
                 </div>
             @endif
             @if ($wishlist->wishlistItems->isEmpty())
-                <p class="mt-2 text-lg leading-8 text-gray-600">Your wishlist is empty! Find some causes to donate to
-                    by
-                    visiting our <a class="underline text-blue-600" href="{{ route('home') }}"
-                        wire:navigate>Charities</a>
-                    page</p>
+                <p class="mt-2 text-lg leading-8 text-gray-600">{{ __('routes/wishlist-view.empty.before') }} <a
+                        class="underline text-blue-600" href="{{ route('home') }}" wire:navigate>Charities</a>
+                    {{ __('routes/wishlist-view.empty.after') }}</p>
             @else
                 <div x-data="{}">
                     @if (!$this->canEditWishlist())
@@ -37,8 +35,7 @@
                         @if ($this->isEditingDescription)
                             <form x-show="isEditingDescription" wire:submit="">
                                 <textarea wire:model="newDescription" @keydown.enter="$wire.stopEditingDescription()"
-                                    @click.away="$wire.stopEditingDescription()"
-                                    @blur="$wire.stopEditingDescription()" rows="5" cols="60"></textarea>
+                                    @click.away="$wire.stopEditingDescription()" @blur="$wire.stopEditingDescription()" rows="5" cols="60"></textarea>
                             </form>
                         @else
                             <p wire:click="startEditingDescription" @click="isEditingDescription = true"
@@ -50,9 +47,11 @@
                     <p class="mt-1 leading-8 text-gray-600">Wishlist Status: {{ $wishlist->status->value }}</p>
                     <fieldset id="wishlist-controls" class="flex flex-col items-center gap-2">
                         @if ($wishlist->status == App\Enums\WishlistStatus::Private)
-                            <x-secondary-button wire:click="publishWishlist">Publish</x-secondary-button>
+                            <x-secondary-button
+                                wire:click="publishWishlist">{{ __('routes/wishlist-view.publish') }}</x-secondary-button>
                         @else
-                            <x-secondary-button wire:click="unpublishWishlist">Unpublish</x-secondary-button>
+                            <x-secondary-button
+                                wire:click="unpublishWishlist">{{ __('routes/wishlist-view.unpublish') }}</x-secondary-button>
                         @endif
                         {{-- <a href="/admin/my-wishlist">
                             <x-secondary-button>Edit Wishlist</x-secondary-button>
@@ -60,7 +59,7 @@
                         @if ($wishlist->status == App\Enums\WishlistStatus::Public)
                             <x-secondary-button
                                 x-on:click="navigator.clipboard.writeText('{{ route('wishlist.show', $wishlist->id) }}')">
-                                Copy Wishlist Link
+                                {{ __('routes/wishlist-view.copy-wishlist-link') }}
                             </x-secondary-button>
                         @endif
                     </fieldset>
@@ -73,7 +72,7 @@
                 <article class="">
                     <div class="relative w-full">
                         <img src="{{ asset($charity->preview_image) }}" alt=""
-                            class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]">
+                            class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1]">
                         <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
                     </div>
                     <h3 class="mt-10 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
@@ -90,7 +89,7 @@
                         </div>
 
                         <x-primary-button class="mt-4"
-                            wire:click="$dispatch('open-modal', 'pledge-modal-{{ $charity->id }}')">Donate</x-primary-button>
+                            wire:click="$dispatch('open-modal', 'pledge-modal-{{ $charity->id }}')">{{ __('routes/wishlist-view.donate') }}</x-primary-button>
 
                         <livewire:pledge-modal :charity="$charity" :wishlist="$wishlist" />
                 </article>

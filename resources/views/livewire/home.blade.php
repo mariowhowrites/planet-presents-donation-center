@@ -2,10 +2,7 @@
     <div class="w-4/5 md:w-3/5 flex flex-col items-center gap-8 mx-auto">
         <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Planet Presents Donation Center</h1>
         <p class="font-serif">
-            This page is your home for finding unique and hard-working environmental nonprofits that will use your
-            donations
-            to change the world for the better. Whether it be LA river revitalization or marine mammal rescue, these
-            nonprofits will use every penny to make the world a better place!
+            {{ __('routes/home.intro')}}
         </p>
         <div class="mx-auto max-w-7xl lg:px-8">
             <ul role="list"

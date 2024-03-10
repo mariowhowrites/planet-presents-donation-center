@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\WishlistResource\Pages;
 use App\Filament\Resources\WishlistResource\RelationManagers;
 use App\Models\Wishlist;
+use Faker\Provider\ar_EG\Text;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -25,7 +26,19 @@ class WishlistResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->label('Name')
+                    ->required(),
+                Forms\Components\Textarea::make('description')
+                    ->label('Description')
+                    ->required(),
+                Forms\Components\Select::make('status')
+                    ->label('Status')
+                    ->options([
+                        'private' => 'Private',
+                        'public' => 'Published',
+                    ])
+                    ->required(),
             ]);
     }
 
@@ -34,6 +47,8 @@ class WishlistResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id'),
+                TextColumn::make('name'),
+                TextColumn::make('description'),
                 TextColumn::make('user.name')->default('Anonymous'),
                 TextColumn::make('pledges_count')->counts('pledges'),
                 TextColumn::make('status'),

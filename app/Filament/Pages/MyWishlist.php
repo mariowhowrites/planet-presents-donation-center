@@ -80,12 +80,23 @@ class MyWishlist extends Page implements HasForms, HasInfolists
     public function getHeaderWidgets(): array
     {
         return [
-            ItemsByWishlist::class,
             PledgesByWishlist::class
         ];
     }
 
+    public function getFooterWidgets(): array
+    {
+        return [
+            ItemsByWishlist::class,
+        ];
+    }
+
     public function getHeaderWidgetsColumns(): int|string|array
+    {
+        return 1;
+    }
+    
+    public function getFooterWidgetsColumns(): int|string|array
     {
         return 1;
     }

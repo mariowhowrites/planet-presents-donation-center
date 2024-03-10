@@ -37,19 +37,19 @@
         <!-- Product form -->
         <div class="pt-10 lg:pt-0 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
             <section aria-labelledby="options-heading">
-                <h2 id="options-heading" class="sr-only">Product options</h2>
+                <h2 id="options-heading" class="sr-only">{{ __('routes/charity-view.label') }}</h2>
 
                 <form>
                     <div class="sm:flex sm:justify-between">
                         <!-- Size selector -->
                         <fieldset class="flex flex-col">
-                            <legend class="block text-sm font-medium text-gray-700">Donation Tiers</legend>
+                            <legend class="block text-sm font-medium text-gray-700">
+                                {{ __('routes/charity-view.label') }}</legend>
 
-                            <p class="py-2">Click on any of the donation tiers below to add or remove them from <a
+                            <p class="py-2">{{ __('routes/charity-view.intro.before') }} <a
                                     class="text-blue-700 hover:text-blue-600 font-bold"
-                                    href="{{ route('my-wishlist') }}" wire:navigate>your wishlist.</a> Share your
-                                wishlist with friends and family to start making an
-                                impact!</p>
+                                    href="{{ route('my-wishlist') }}" wire:navigate>your wishlist.</a>
+                                {{ __('routes/charity-view.intro.after') }}</p>
                             <div class="mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2">
                                 @foreach ($charity->tiers as $tier)
                                     <!-- Active: "ring-2 ring-indigo-500" -->
@@ -66,8 +66,7 @@
                                             <p id="size-choice-0-label" class="text-base font-medium text-gray-900">
                                                 {{ $tier->name }}</p>
                                             <span class="text-xs" wire:loading.delay
-                                                wire:target="toggleFromWishlist({{ $tier->id }})">Updating your
-                                                wishlist...</span>
+                                                wire:target="toggleFromWishlist({{ $tier->id }})">{{ __('routes/charity-view.updating-wishlist') }}</span>
                                         </div>
                                         <p id="size-choice-0-description" class="mt-1 text-sm text-gray-500">
                                             {{ $tier->description }}</p>
