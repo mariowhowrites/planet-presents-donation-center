@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Enums\WishlistStatus;
 use App\Models\Wishlist;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -50,18 +49,14 @@ class WishlistView extends Component
 
     public function publishWishlist()
     {
-        $this->wishlist->status = WishlistStatus::Public;
-
-        $this->wishlist->save();
+        $this->wishlist->publish();
 
         $this->wishlist->refresh();
     }
 
     public function unpublishWishlist()
     {
-        $this->wishlist->status = WishlistStatus::Private;
-
-        $this->wishlist->save();
+        $this->wishlist->unpublish();
 
         $this->wishlist->refresh();
     }

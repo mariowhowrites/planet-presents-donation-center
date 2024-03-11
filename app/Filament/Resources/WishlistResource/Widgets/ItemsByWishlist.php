@@ -17,7 +17,7 @@ class ItemsByWishlist extends BaseWidget
                 WishlistItem::where('wishlist_id', auth()->user()->currentWishlist()->id)
             )
             ->columns([
-                Tables\Columns\TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('tier.description'),
                 Tables\Columns\TextColumn::make('tier.name'),
                 Tables\Columns\TextColumn::make('tier.charity.name'),
             ])

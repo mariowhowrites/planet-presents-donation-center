@@ -17,7 +17,7 @@ use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Support\Exceptions\Halt;
 
-class MyWishlist extends Page implements HasForms, HasInfolists
+class ManageWishlist extends Page implements HasForms, HasInfolists
 {
     use InteractsWithForms;
     use InteractsWithInfolists;
@@ -26,17 +26,21 @@ class MyWishlist extends Page implements HasForms, HasInfolists
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
-    protected static string $view = 'filament.pages.my-wishlist';
+    protected static string $view = 'filament.pages.manage-wishlist';
+
+    public $wishlist = null;
 
     public function mount()
     {
-        $this->form->fill(auth()->user()->currentWishlist()->toArray());
+        $this->wishlist = auth()->user()->currentWishlist();
+        $this->form->fill($this->wishlist->toArray());
     }
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
+                TextInput::make('name')->required(),
                 TextInput::make('description')
                     ->required()
             ])
@@ -49,7 +53,7 @@ class MyWishlist extends Page implements HasForms, HasInfolists
             Action::make('save')
                 ->label(__('filament-panels::resources/pages/edit-record.form.actions.save.label'))
                 ->submit('save')
-        ];
+        ];;
     }
 
     public function save(): void
@@ -57,7 +61,7 @@ class MyWishlist extends Page implements HasForms, HasInfolists
         try {
             $data = $this->form->getState();
 
-            auth()->user()->currentWishlist()->update($data);
+            $this->wishlist->update($data);
         } catch (Halt $e) {
             return;
         }
@@ -70,17 +74,29 @@ class MyWishlist extends Page implements HasForms, HasInfolists
 
     public function getHeaderActions(): array
     {
-        return [
+        $header_actions = [
             Action::make('view_wishlist')
                 ->label('View Wishlist')
                 ->url(route('my-wishlist'))
         ];
+
+        $header_actions[] = $this->wishlist->isPublic() ? 
+            Action::make('unpublish_wishlist')
+                ->label('Unpublish Wishlist')
+                ->confirm('Are you sure you want to unpublish your wishlist?')
+                ->onQueue('before')
+                ->perform(fn () => $this->wishlist->unpublish()) :
+            Action::make('publish_wishlist')
+                ->label('Publish Wishlist')
+                ->confirm('Are you sure you want to publish your wishlist?')
+                ->onQueue('before')
+                ->perform(fn () => $this->wishlist->publish());
     }
 
     public function getHeaderWidgets(): array
     {
         return [
-            PledgesByWishlist::class
+            PledgesByWishlist::class,
         ];
     }
 

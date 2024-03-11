@@ -2,7 +2,6 @@
 
 namespace App\Policies;
 
-use App\Enums\WishlistStatus;
 use App\Models\User;
 use App\Models\Wishlist;
 use Illuminate\Auth\Access\Response;
@@ -27,7 +26,7 @@ class WishlistPolicy
         //     || $user->role == 'admin'
         //     || $wishlist->status == WishlistStatus::Public;
 
-        if ($wishlist->status == WishlistStatus::Public) {
+        if ($wishlist->isPublic()) {
 
             return true;
         }
@@ -53,7 +52,6 @@ class WishlistPolicy
      */
     public function update(User $user, Wishlist $wishlist): bool
     {
-        Log::info('Checking if user can update wishlist, of course we can!');
         return true;
 
         // Log::info('Checking if user can update wishlist');
