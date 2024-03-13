@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Enums\WishlistStatus;
 use App\Filament\Resources\WishlistResource\Widgets\ItemsByWishlist;
 use App\Filament\Resources\WishlistResource\Widgets\PledgesByWishlist;
 use Filament\Actions\Action;
@@ -10,17 +11,17 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Concerns\InteractsWithInfolists;
-use Filament\Infolists\Contracts\HasInfolists;
 use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
+use Filament\Pages\Dashboard as FilamentDashboard;
 use Filament\Pages\Page;
 use Filament\Support\Exceptions\Halt;
+use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\On;
 
-class ManageWishlist extends Page implements HasForms, HasInfolists
+class Dashboard extends FilamentDashboard implements HasForms
 {
     use InteractsWithForms;
-    use InteractsWithInfolists;
 
     public ?array $data = [];
 
@@ -28,12 +29,28 @@ class ManageWishlist extends Page implements HasForms, HasInfolists
 
     protected static string $view = 'filament.pages.manage-wishlist';
 
+    protected static ?string $title = 'Manage Wishlist';
+
     public $wishlist = null;
 
     public function mount()
     {
         $this->wishlist = auth()->user()->currentWishlist();
         $this->form->fill($this->wishlist->toArray());
+    }
+
+    #[On('wishlist-status-updated-{wishlist.id}')]
+    public function updateWishlist($status)
+    {
+        Log::info($status);
+
+        $this->wishlist->refresh();
+        $this->form->fill($this->wishlist->toArray());
+
+        Notification::make()
+            ->success()
+            ->title($status === WishlistStatus::Public->value ? 'Wishlist published' : 'Wishlist unpublished')
+            ->send();
     }
 
     public function form(Form $form): Form
@@ -53,7 +70,7 @@ class ManageWishlist extends Page implements HasForms, HasInfolists
             Action::make('save')
                 ->label(__('filament-panels::resources/pages/edit-record.form.actions.save.label'))
                 ->submit('save')
-        ];;
+        ];
     }
 
     public function save(): void
@@ -80,17 +97,25 @@ class ManageWishlist extends Page implements HasForms, HasInfolists
                 ->url(route('my-wishlist'))
         ];
 
-        $header_actions[] = $this->wishlist->isPublic() ? 
+        $header_actions[] = $this->wishlist->isPublic() ?
             Action::make('unpublish_wishlist')
-                ->label('Unpublish Wishlist')
-                ->confirm('Are you sure you want to unpublish your wishlist?')
-                ->onQueue('before')
-                ->perform(fn () => $this->wishlist->unpublish()) :
+            ->label('Unpublish Wishlist')
+            ->requiresConfirmation()
+            ->action(function () {
+                $this->wishlist->unpublish();
+
+                $this->dispatch('wishlist-status-updated-' . $this->wishlist->id, WishlistStatus::Private);
+            }) :
             Action::make('publish_wishlist')
-                ->label('Publish Wishlist')
-                ->confirm('Are you sure you want to publish your wishlist?')
-                ->onQueue('before')
-                ->perform(fn () => $this->wishlist->publish());
+            ->label('Publish Wishlist')
+            ->requiresConfirmation()
+            ->action(function () {
+                $this->wishlist->publish();
+
+                $this->dispatch('wishlist-status-updated-' . $this->wishlist->id, WishlistStatus::Public);
+            });
+
+        return $header_actions;
     }
 
     public function getHeaderWidgets(): array
@@ -111,7 +136,7 @@ class ManageWishlist extends Page implements HasForms, HasInfolists
     {
         return 1;
     }
-    
+
     public function getFooterWidgetsColumns(): int|string|array
     {
         return 1;

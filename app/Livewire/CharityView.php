@@ -32,6 +32,8 @@ class CharityView extends Component
         ]);
 
         $this->currentWishlist->refresh();
+
+        $this->dispatch('wishlist-items-changed-' . $this->currentWishlist->id, $this->currentWishlist->itemCount());
     }
 
     public function removeFromWishlist(Tier $tier)
@@ -39,6 +41,8 @@ class CharityView extends Component
         $this->currentWishlist->wishlistItems()->where('tier_id', $tier->id)->delete();
 
         $this->currentWishlist->refresh();
+
+        $this->dispatch('wishlist-items-changed-' . $this->currentWishlist->id, $this->currentWishlist->itemCount());
     }
 
     public function toggleFromWishlist(Tier $tier)

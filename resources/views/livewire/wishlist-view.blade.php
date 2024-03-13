@@ -14,12 +14,6 @@
                             class="text-3xl pointer-cursor font-bold tracking-tight text-gray-900 sm:text-4xl">
                             {{ $wishlist->name }}</h2>
                     @endif
-                    {{-- <form x-show="isEditingName" wire:submit="">
-                        <input wire:model="newName" type="text" id="newName"
-                            @keydown.enter="isEditingName = false; $wire.stopEditingName()"
-                            @click.away="isEditingName = false; $wire.stopEditingName()"
-                            @blur="isEditingName = false; $wire.stopEditingName()">
-                    </form> --}}
                 </div>
             @endif
             @if ($wishlist->wishlistItems->isEmpty())
@@ -66,10 +60,13 @@
                 @endif
             @endif
         </div>
-        <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+        <div class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-4">
             {{-- Wishlist items --}}
             @foreach ($wishlist->getSelectedCharities() as $charity)
-                <article class="">
+                <article @class([
+                    'col-span-1 lg:col-span-2' => true,
+                    'col-start-1 lg:col-start-2' => $loop->count == 1
+                ])>
                     <div class="relative w-full">
                         <img src="{{ asset($charity->preview_image) }}" alt=""
                             class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1]">

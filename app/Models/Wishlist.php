@@ -4,22 +4,18 @@ namespace App\Models;
 
 use App\Enums\WishlistStatus;
 use App\Models\Traits\HasPledges;
+use App\Models\Traits\HasWishlistItems;
+use App\Models\Traits\HasWishlistStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
 
 class Wishlist extends Model
 {
-    use HasFactory, HasPledges;
+    use HasFactory, HasPledges, HasWishlistItems, HasWishlistStatus;
 
     protected $casts = [
         'status' => WishlistStatus::class
     ];
-
-    public function wishlistItems()
-    {
-        return $this->hasMany(WishlistItem::class);
-    }
 
     public function user()
     {
@@ -70,30 +66,5 @@ class Wishlist extends Model
         })->map(function ($item) {
             return $item->tier;
         });
-    }
-
-    // Status fns
-    public function isPublic()
-    {
-        return $this->status == WishlistStatus::Public;
-    }
-
-    public function isPrivate()
-    {
-        return $this->status == WishlistStatus::Private;
-    }
-
-    public function publish()
-    {
-        $this->status = WishlistStatus::Public;
-
-        $this->save();
-    }
-
-    public function unpublish()
-    {
-        $this->status = WishlistStatus::Private;
-
-        $this->save();
     }
 }

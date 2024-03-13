@@ -1,6 +1,10 @@
 <?php
 
 use App\Livewire\Actions\Logout;
+use App\Models\Wishlist;
+
+use function Livewire\Volt\{state};
+use function Livewire\Volt\{on};
 
 $logout = function (Logout $logout) {
     $logout();
@@ -10,7 +14,7 @@ $logout = function (Logout $logout) {
 
 ?>
 
-<nav x-data="{ open: false }" class="bg-emerald-900 border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-emerald-900 border-b border-gray-100 sticky top-0 z-10">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -23,15 +27,16 @@ $logout = function (Logout $logout) {
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('my-wishlist')" :active="request()->routeIs('my-wishlist')" wire:navigate>
+                <div class="hidden gap-2 sm:-my-px sm:ms-10 sm:flex" x-data="{ didIncrement: false }">
+                    <x-nav-link :href="route('my-wishlist')" wire:navigate>
                         {{ __('Your Wishlist') }}
                     </x-nav-link>
+                    <livewire:wishlist-item-count-badge />
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="hidden sm:flex sm:items-center sm:ms-6 gap-4">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
@@ -83,7 +88,8 @@ $logout = function (Logout $logout) {
             </div>
 
             <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
+            <div class="-me-2 flex gap-2 items-center sm:hidden" x-data="{ didIncrement: false }">
+                <livewire:wishlist-item-count-badge />
                 <button @click="open = ! open"
                     class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -100,10 +106,6 @@ $logout = function (Logout $logout) {
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-
-        </div>
-
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
