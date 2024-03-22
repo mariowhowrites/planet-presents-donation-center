@@ -60,8 +60,8 @@ $logout = function (Logout $logout) {
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('my-wishlist')">
-                            {{ __('Your Wishlist') }}
+                        <x-dropdown-link :href="route('filament.admin.pages.dashboard')">
+                            {{ __('Manage Wishlist') }}
                         </x-dropdown-link>
 
                         @auth
@@ -119,8 +119,8 @@ $logout = function (Logout $logout) {
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('my-wishlist')" wire:navigate>
-                    {{ __('Your Wishlist') }}
+                <x-responsive-nav-link :href="route('filament.admin.pages.dashboard')" wire:navigate>
+                    {{ __('Manage Wishlist') }}
                 </x-responsive-nav-link>
                 @auth
                     <x-responsive-nav-link :href="route('profile')" wire:navigate>

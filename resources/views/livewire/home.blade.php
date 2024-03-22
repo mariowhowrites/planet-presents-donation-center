@@ -2,7 +2,7 @@
     <div class="w-4/5 md:w-3/5 flex flex-col items-center gap-8 mx-auto">
         <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Planet Presents Donation Center</h1>
         <p class="font-serif">
-            {{ __('routes/home.intro')}}
+            {{ __('routes/home.intro') }}
         </p>
         <div class="mx-auto max-w-7xl lg:px-8">
             <ul role="list"
@@ -11,7 +11,7 @@
                     <li>
                         <a href="{{ route('charity.show', $charity->id) }}" wire:navigate>
                             <img class="aspect-[3/2] w-full rounded-2xl object-cover"
-                                src="{{ asset($charity->preview_image) }}" alt="">
+                                src="{{ asset('storage/' . $charity->preview_image) }}" alt="">
                             <h3 class="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900">
                                 {{ $charity->name }}</h3>
                         </a>

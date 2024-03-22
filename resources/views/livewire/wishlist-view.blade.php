@@ -1,3 +1,12 @@
+<x-slot:meta_tags>
+    <meta property="og:title"
+        content="{{ $wishlist->name }}: {{ config('app.name', 'Planet Presents Donation Center') }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ route('wishlist.show', $wishlist->id) }}">
+    <meta property="og:image" content="{{ $wishlist->getSelectedCharities()[0]->preview_image ?? '' }}">
+    <meta name="twitter:card" content="summary">
+</x-slot:meta_tags>
+
 <div class="bg-white py-24 sm:py-32 grow">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-2xl text-center">
@@ -7,8 +16,9 @@
             @else
                 <div class="h-10" x-data="{}">
                     @if ($this->isEditingName)
-                        <input wire:model="newName" type="text" id="newName" @keydown.enter="$wire.stopEditingName()"
-                            @click.away="$wire.stopEditingName()" @blur="$wire.stopEditingName()">
+                        <input wire:model="newName" type="text" id="newName"
+                            @keydown.enter="$wire.stopEditingName()" @click.away="$wire.stopEditingName()"
+                            @blur="$wire.stopEditingName()">
                     @else
                         <h2 wire:click="startEditingName"
                             class="text-3xl pointer-cursor font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -40,21 +50,23 @@
                 @if ($this->canEditWishlist())
                     <p class="mt-1 leading-8 text-gray-600">Wishlist Status: {{ $wishlist->status->value }}</p>
                     <fieldset id="wishlist-controls" class="flex flex-col items-center gap-2">
-                        @if ($wishlist->isPrivate())
-                            <x-secondary-button
-                                wire:click="publishWishlist">{{ __('routes/wishlist-view.publish') }}</x-secondary-button>
-                        @else
-                            <x-secondary-button
-                                wire:click="unpublishWishlist">{{ __('routes/wishlist-view.unpublish') }}</x-secondary-button>
-                        @endif
-                        {{-- <a href="/admin/my-wishlist">
+                        @if (!$wishlist->getSelectedCharities()->isEmpty())
+                            @if ($wishlist->isPrivate())
+                                <x-secondary-button
+                                    wire:click="publishWishlist">{{ __('routes/wishlist-view.publish') }}</x-secondary-button>
+                            @else
+                                <x-secondary-button
+                                    wire:click="unpublishWishlist">{{ __('routes/wishlist-view.unpublish') }}</x-secondary-button>
+                            @endif
+                            {{-- <a href="/admin/my-wishlist">
                             <x-secondary-button>Edit Wishlist</x-secondary-button>
                         </a> --}}
-                        @if ($wishlist->isPublic())
-                            <x-secondary-button
-                                x-on:click="navigator.clipboard.writeText('{{ route('wishlist.show', $wishlist->id) }}')">
-                                {{ __('routes/wishlist-view.copy-wishlist-link') }}
-                            </x-secondary-button>
+                            @if ($wishlist->isPublic())
+                                <x-secondary-button
+                                    x-on:click="navigator.clipboard.writeText('{{ route('wishlist.show', $wishlist->id) }}')">
+                                    {{ __('routes/wishlist-view.copy-wishlist-link') }}
+                                </x-secondary-button>
+                            @endif
                         @endif
                     </fieldset>
                 @endif
@@ -65,10 +77,10 @@
             @foreach ($wishlist->getSelectedCharities() as $charity)
                 <article @class([
                     'col-span-1 lg:col-span-2' => true,
-                    'col-start-1 lg:col-start-2' => $loop->count == 1
+                    'col-start-1 lg:col-start-2' => $loop->count == 1,
                 ])>
                     <div class="relative w-full">
-                        <img src="{{ asset($charity->preview_image) }}" alt=""
+                        <img src="{{ asset('storage/' . $charity->preview_image) }}" alt=""
                             class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1]">
                         <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
                     </div>

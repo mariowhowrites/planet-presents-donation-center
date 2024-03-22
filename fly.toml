@@ -35,4 +35,8 @@ console_command = 'php /var/www/html/artisan tinker'
   cpus = 1
 
 [deploy]
-  release_command = "php /var/www/html/artisan migrate:refresh --force --seed"
+  release_command = "php /var/www/html/artisan app:prod-setup"
+
+[mounts]
+  source="planetpresents_storage_vol"
+  destination = "/var/www/html/storage"

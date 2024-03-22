@@ -47,6 +47,8 @@ class CharityResource extends Resource
                     ->url()
                     ->maxLength(255),
                 FileUpload::make('preview_image')
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/avif', 'image/webp'])
+                    ->required()
             ]);
     }
 
@@ -84,6 +86,13 @@ class CharityResource extends Resource
             'index' => Pages\ListCharities::route('/'),
             'create' => Pages\CreateCharity::route('/create'),
             'edit' => Pages\EditCharity::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getHeaderActions(): array
+    {
+        return [
+            //
         ];
     }
 }
