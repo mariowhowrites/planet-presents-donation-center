@@ -5,98 +5,34 @@
             <div class="grid grid-cols-2 gap-8 xl:col-span-2">
                 <div class="md:grid md:grid-cols-2 md:gap-8">
                     <div>
-                        <h3 class="text-sm font-semibold leading-6 text-white">Planet Presents</h3>
+                        <h3 class="text-sm font-semibold leading-6 text-white">{{ __('footer.site_title') }}</h3>
                         <ul role="list" class="mt-6 space-y-4">
                             <li>
-                                <a href="#"
-                                    class="text-sm leading-6 text-gray-300 hover:text-white">Marketing</a>
+                                <a href="{{ route('my-wishlist') }}" class="text-sm leading-6 text-gray-300 hover:text-white">{{ __('footer.your_wishlist') }}</a>
                             </li>
                             <li>
-                                <a href="#"
-                                    class="text-sm leading-6 text-gray-300 hover:text-white">Analytics</a>
+                                <a href="https://planetpresents.org/about"
+                                    class="text-sm leading-6 text-gray-300 hover:text-white">{{ __('footer.about') }}</a>
                             </li>
                             <li>
-                                <a href="#"
-                                    class="text-sm leading-6 text-gray-300 hover:text-white">Commerce</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="text-sm leading-6 text-gray-300 hover:text-white">Insights</a>
+                                <a href="https://planetpresents.org/contact"
+                                    class="text-sm leading-6 text-gray-300 hover:text-white">{{ __('footer.contact') }}</a>
                             </li>
                         </ul>
                     </div>
-                    {{-- <div class="mt-10 md:mt-0">
-                        <h3 class="text-sm font-semibold leading-6 text-gray-900">Support</h3>
-                        <ul role="list" class="mt-6 space-y-4">
-                            <li>
-                                <a href="#"
-                                    class="text-sm leading-6 text-gray-600 hover:text-gray-900">Pricing</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="text-sm leading-6 text-gray-600 hover:text-gray-900">Documentation</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-sm leading-6 text-gray-600 hover:text-gray-900">Guides</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-sm leading-6 text-gray-600 hover:text-gray-900">API
-                                    Status</a>
-                            </li>
-                        </ul>
-                    </div> --}}
                 </div>
-                {{-- <div class="md:grid md:grid-cols-2 md:gap-8">
-                    <div>
-                        <h3 class="text-sm font-semibold leading-6 text-gray-900">Company</h3>
-                        <ul role="list" class="mt-6 space-y-4">
-                            <li>
-                                <a href="#" class="text-sm leading-6 text-gray-600 hover:text-gray-900">About</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-sm leading-6 text-gray-600 hover:text-gray-900">Blog</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-sm leading-6 text-gray-600 hover:text-gray-900">Jobs</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-sm leading-6 text-gray-600 hover:text-gray-900">Press</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="text-sm leading-6 text-gray-600 hover:text-gray-900">Partners</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="mt-10 md:mt-0">
-                        <h3 class="text-sm font-semibold leading-6 text-gray-900">Legal</h3>
-                        <ul role="list" class="mt-6 space-y-4">
-                            <li>
-                                <a href="#" class="text-sm leading-6 text-gray-600 hover:text-gray-900">Claim</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="text-sm leading-6 text-gray-600 hover:text-gray-900">Privacy</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-sm leading-6 text-gray-600 hover:text-gray-900">Terms</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div> --}}
             </div>
             <div class="mt-10 xl:mt-0">
-                <h3 class="text-sm font-semibold leading-6 text-white">Subscribe to our newsletter</h3>
-                <p class="mt-2 text-sm leading-6 text-slate-300">The latest news, articles, and resources, sent to your
-                    inbox weekly.</p>
+                <h3 class="text-sm font-semibold leading-6 text-white">{{ __('footer.subscribe_header') }}</h3>
+                <p class="mt-2 text-sm leading-6 text-slate-300">{{ __('footer.subscribe_description') }}</p>
                 <form class="mt-6 sm:flex sm:max-w-md">
-                    <label for="email-address" class="sr-only">Email address</label>
+                    <label for="email-address" class="sr-only">{{ __('footer.email_address') }}</label>
                     <input type="email" name="email-address" id="email-address" autocomplete="email" required
                         class="w-full min-w-0 appearance-none rounded-md border-0 bg-white px-3 py-1.5 text-base text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:w-64 sm:text-sm sm:leading-6 xl:w-full"
-                        placeholder="Enter your email">
+                        placeholder="{{ __('footer.subscribe_input_placeholder') }}">
                     <div class="mt-4 sm:ml-4 sm:mt-0 sm:flex-shrink-0">
                         <button type="submit"
-                            class="flex w-full items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Subscribe</button>
+                            class="flex w-full items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ __('footer.subscribe_button') }}</button>
                     </div>
                 </form>
             </div>
@@ -120,14 +56,7 @@
                             clip-rule="evenodd" />
                     </svg>
                 </a>
-                <a href="#" class="text-gray-200 hover:text-gray-300">
-                    <span class="sr-only">X</span>
-                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                            d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
-                    </svg>
-                </a>
-                <a href="#" class="text-gray-200 hover:text-gray-300">
+                <a href="https://github.com/mariowhowrites/planet-presents-donation-center" class="text-gray-200 hover:text-gray-300">
                     <span class="sr-only">GitHub</span>
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path fill-rule="evenodd"
@@ -135,17 +64,8 @@
                             clip-rule="evenodd" />
                     </svg>
                 </a>
-                <a href="#" class="text-gray-200 hover:text-gray-300">
-                    <span class="sr-only">YouTube</span>
-                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path fill-rule="evenodd"
-                            d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </div>
-            <p class="mt-8 text-xs leading-5 text-gray-300 md:order-1 md:mt-0">&copy; {{ date("Y") }} Planet Presents, Inc. All
-                rights reserved.</p>
+            </div>  
+            <p class="mt-8 text-xs leading-5 text-gray-300 md:order-1 md:mt-0">{{ __('footer.website_by') }} <a href="https://mariowhowrites.com">MarioWhoWrites</a></p>
         </div>
     </div>
 </footer>
