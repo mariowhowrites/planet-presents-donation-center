@@ -47,7 +47,7 @@ class User extends Authenticatable implements FilamentUser
         'password' => 'hashed',
     ];
 
-    public function wishlist()
+    public function wishlists()
     {
         return $this->hasMany(Wishlist::class);
     }
@@ -55,9 +55,7 @@ class User extends Authenticatable implements FilamentUser
     protected static function booted(): void
     {
         static::created(function(User $user) {
-            $wishlist_from_session = Wishlist::firstOrCreateFromSession();
-
-            $user->wishlist()->save($wishlist_from_session);
+            Wishlist::firstOrCreateFromSession($user->id);
         });
     }
 
@@ -68,6 +66,6 @@ class User extends Authenticatable implements FilamentUser
 
     public function currentWishlist()
     {
-        return $this->wishlist->first();
+        return $this->wishlists->first();
     }
 }

@@ -8,6 +8,7 @@ use App\Models\Traits\HasWishlistItems;
 use App\Models\Traits\HasWishlistStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Wishlist extends Model
 {
@@ -30,18 +31,26 @@ class Wishlist extends Model
     public static function current()
     {
         if (auth()->check()) {
-            return auth()->user()->wishlist->first();
+            return auth()->user()->currentWishlist() ?? Wishlist::firstOrCreateFromSession(auth()->id());
         }
 
         return Wishlist::firstOrCreateFromSession();
     }
 
-    public static function firstOrCreateFromSession()
+    public static function firstOrCreateFromSession($user_id = null)
     {
-        return Wishlist::firstOrCreate(
+        $wishlist = Wishlist::firstOrNew(
             ['session_id' => session()->getId()],
             ['description' => 'Welcome to my wishlist! Read about some of my selected charities below, and please consider pledging your support. Thank you!']
         );
+
+        if ($user_id) {
+            $wishlist->user_id = $user_id;
+        }
+
+        $wishlist->save();
+
+        return $wishlist;
     }
 
     public static function getFromSession()

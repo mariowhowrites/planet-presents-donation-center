@@ -22,7 +22,7 @@
                     <li>
                         <a href="{{ route('charity.show', $charity->id) }}" wire:navigate>
                             <img class="aspect-[3/2] w-full rounded-2xl object-cover"
-                                src="{{ asset('storage/' . $charity->preview_image) }}" alt="">
+                                src="{{ $charity->previewImageURL() }}" alt="">
                             <h3 class="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900">
                                 {{ $charity->name }}</h3>
                         </a>

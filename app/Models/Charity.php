@@ -13,4 +13,9 @@ class Charity extends Model
     {
         return $this->hasMany(Tier::class);
     }
+
+    public function previewImageURL()
+    {
+        return asset('storage/' . $this->preview_image);
+    }
 }

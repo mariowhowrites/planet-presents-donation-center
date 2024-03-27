@@ -80,7 +80,7 @@
                     'col-start-1 lg:col-start-2' => $loop->count == 1,
                 ])>
                     <div class="relative w-full">
-                        <img src="{{ asset('storage/' . $charity->preview_image) }}" alt=""
+                        <img src="{{ $charity->previewImageURL() }}" alt=""
                             class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1]">
                         <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
                     </div>

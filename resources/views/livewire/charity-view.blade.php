@@ -30,7 +30,7 @@
         <!-- Product image -->
         <div class="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
             <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
-                <img src="{{ asset('storage/' . $charity->preview_image) }}" alt="{{ $charity->name }}"
+                <img src="{{ $charity->previewImageURL() }}" alt="{{ $charity->name }}"
                     class="h-full w-full object-cover object-center">
             </div>
         </div>

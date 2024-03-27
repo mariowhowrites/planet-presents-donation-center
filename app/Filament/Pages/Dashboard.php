@@ -5,6 +5,7 @@ namespace App\Filament\Pages;
 use App\Enums\WishlistStatus;
 use App\Filament\Resources\WishlistResource\Widgets\ItemsByWishlist;
 use App\Filament\Resources\WishlistResource\Widgets\PledgesByWishlist;
+use App\Models\Wishlist;
 use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -35,7 +36,7 @@ class Dashboard extends FilamentDashboard implements HasForms
 
     public function mount()
     {
-        $this->wishlist = auth()->user()->currentWishlist();
+        $this->wishlist = Wishlist::current();
         $this->form->fill($this->wishlist->toArray());
     }
 
