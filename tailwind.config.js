@@ -31,7 +31,6 @@ export default {
                     "50%": { transform: "rotate(20deg) scale(1.2)" },
                     "70%": { transform: "rotate(0deg) scale(1.2)" },
                     "100%": { transform: "scale(1)" }
-
                 }
             },
         },

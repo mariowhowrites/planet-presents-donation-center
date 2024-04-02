@@ -131,4 +131,8 @@ return [
         ],
     ],
 
+
+    'mailerlite' => [
+        'api_key' => env('MAILERLITE_API_KEY'),
+    ],
 ];

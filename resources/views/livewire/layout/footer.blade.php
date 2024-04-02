@@ -1,3 +1,21 @@
+<?php
+
+use App\Livewire\Forms\MailerliteSignupForm;
+use Illuminate\Support\Facades\Log;
+use function Livewire\Volt\{form};
+
+form(MailerliteSignupForm::class);
+
+$addEmailSubscriber = function() {
+    $success = $this->form->submit();
+
+    if ($success) {
+        $this->dispatch('email-subscriber-added');
+    }
+};
+
+?>
+
 <footer class="text-white bg-emerald-900" aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
     <div class="mx-auto max-w-7xl px-6 pb-8 pt-20 sm:pt-24 lg:px-8 lg:pt-32">
@@ -25,16 +43,20 @@
             <div class="mt-10 xl:mt-0">
                 <h3 class="text-sm font-semibold leading-6 text-white">{{ __('footer.subscribe_header') }}</h3>
                 <p class="mt-2 text-sm leading-6 text-slate-300">{{ __('footer.subscribe_description') }}</p>
-                <form class="mt-6 sm:flex sm:max-w-md">
+                <form wire:submit="addEmailSubscriber" class="mt-6 sm:flex sm:max-w-md">
                     <label for="email-address" class="sr-only">{{ __('footer.email_address') }}</label>
-                    <input type="email" name="email-address" id="email-address" autocomplete="email" required
+                    <input wire:model="form.email" type="email" name="email-address" id="email-address" autocomplete="email" required
                         class="w-full min-w-0 appearance-none rounded-md border-0 bg-white px-3 py-1.5 text-base text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:w-64 sm:text-sm sm:leading-6 xl:w-full"
                         placeholder="{{ __('footer.subscribe_input_placeholder') }}">
+                    @error('form.email') <span class="error">{{ $message }}</span> @enderror
                     <div class="mt-4 sm:ml-4 sm:mt-0 sm:flex-shrink-0">
                         <button type="submit"
                             class="flex w-full items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ __('footer.subscribe_button') }}</button>
                     </div>
                 </form>
+                <x-action-message class="mt-4 text-gray-100 font-bold" on="email-subscriber-added">
+                    {{ __('Signed up successfully! Please check your email to confirm.˝') }}
+                </x-action-message>
             </div>
         </div>
         <div

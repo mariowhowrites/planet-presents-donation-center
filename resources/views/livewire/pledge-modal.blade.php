@@ -11,7 +11,7 @@
                     <div class="flex flex-col gap-y-2">
                         <x-input-label for="message" value="{{ __('Message') }}" />
                         <textarea wire:model="message" id="message"
-                            class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             placeholder="Write a message to the wishlist creator..."></textarea>
                     </div>
                     <div class="flex flex-col gap-y-2">
