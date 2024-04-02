@@ -10,8 +10,6 @@ class MailerLite
 {
     public static function addSubscriber($email)
     {
-        // Add subscriber to MailerLite
-
         try {
             $response = Http::withToken(config('mail.mailerlite.api_key'))->post('https://connect.mailerlite.com/api/subscribers', [
                 'email' => $email,

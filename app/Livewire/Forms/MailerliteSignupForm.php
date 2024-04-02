@@ -3,7 +3,6 @@
 namespace App\Livewire\Forms;
 
 use App\Clients\MailerLite;
-use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
