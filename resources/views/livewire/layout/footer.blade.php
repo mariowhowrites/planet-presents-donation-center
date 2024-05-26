@@ -6,7 +6,7 @@ use function Livewire\Volt\{form};
 
 form(MailerliteSignupForm::class);
 
-$addEmailSubscriber = function() {
+$addEmailSubscriber = function () {
     $success = $this->form->submit();
 
     if ($success) {
@@ -16,17 +16,18 @@ $addEmailSubscriber = function() {
 
 ?>
 
-<footer class="text-white bg-emerald-900" aria-labelledby="footer-heading">
+<footer id="footer-section" class="text-white bg-emerald-900" aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
     <div class="mx-auto max-w-7xl px-6 pb-8 pt-20 sm:pt-24 lg:px-8 lg:pt-32">
         <div class="xl:grid xl:grid-cols-3 xl:gap-8">
             <div class="grid grid-cols-2 gap-8 xl:col-span-2">
                 <div class="md:grid md:grid-cols-2 md:gap-8">
-                    <div>
+                    <div id="footer-links">
                         <h3 class="text-sm font-semibold leading-6 text-white">{{ __('footer.site_title') }}</h3>
                         <ul role="list" class="mt-6 space-y-4">
                             <li>
-                                <a href="{{ route('my-wishlist') }}" class="text-sm leading-6 text-gray-300 hover:text-white">{{ __('footer.your_wishlist') }}</a>
+                                <a href="{{ route('my-wishlist') }}"
+                                    class="text-sm leading-6 text-gray-300 hover:text-white">{{ __('footer.your_wishlist') }}</a>
                             </li>
                             <li>
                                 <a href="https://planetpresents.org/about"
@@ -40,15 +41,18 @@ $addEmailSubscriber = function() {
                     </div>
                 </div>
             </div>
-            <div class="mt-10 xl:mt-0">
+            <div id="footer-email-signup-section" class="mt-10 xl:mt-0">
                 <h3 class="text-sm font-semibold leading-6 text-white">{{ __('footer.subscribe_header') }}</h3>
                 <p class="mt-2 text-sm leading-6 text-slate-300">{{ __('footer.subscribe_description') }}</p>
                 <form wire:submit="addEmailSubscriber" class="mt-6 sm:flex sm:max-w-md">
                     <label for="email-address" class="sr-only">{{ __('footer.email_address') }}</label>
-                    <input wire:model="form.email" type="email" name="email-address" id="email-address" autocomplete="email" required
+                    <input wire:model="form.email" type="email" name="email-address" id="email-address"
+                        autocomplete="email" required
                         class="w-full min-w-0 appearance-none rounded-md border-0 bg-white px-3 py-1.5 text-base text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:w-64 sm:text-sm sm:leading-6 xl:w-full"
                         placeholder="{{ __('footer.subscribe_input_placeholder') }}">
-                    @error('form.email') <span class="error">{{ $message }}</span> @enderror
+                    @error('form.email')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
                     <div class="mt-4 sm:ml-4 sm:mt-0 sm:flex-shrink-0">
                         <button type="submit"
                             class="flex w-full items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ __('footer.subscribe_button') }}</button>
@@ -59,7 +63,7 @@ $addEmailSubscriber = function() {
                 </x-action-message>
             </div>
         </div>
-        <div
+        <div id="footer-social-links-section"
             class="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 md:flex md:items-center md:justify-between lg:mt-24">
             <div class="flex space-x-6 md:order-2">
                 <a href="#" class="text-gray-200 hover:text-gray-300">
@@ -78,7 +82,8 @@ $addEmailSubscriber = function() {
                             clip-rule="evenodd" />
                     </svg>
                 </a>
-                <a href="https://github.com/mariowhowrites/planet-presents-donation-center" class="text-gray-200 hover:text-gray-300">
+                <a href="https://github.com/mariowhowrites/planet-presents-donation-center"
+                    class="text-gray-200 hover:text-gray-300">
                     <span class="sr-only">GitHub</span>
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path fill-rule="evenodd"
@@ -86,8 +91,9 @@ $addEmailSubscriber = function() {
                             clip-rule="evenodd" />
                     </svg>
                 </a>
-            </div>  
-            <p class="mt-8 text-xs leading-5 text-gray-300 md:order-1 md:mt-0">{{ __('footer.website_by') }} <a href="https://mariowhowrites.com">MarioWhoWrites</a></p>
+            </div>
+            {{-- <p id="" class="mt-8 text-xs leading-5 text-gray-300 md:order-1 md:mt-0">{{ __('footer.website_by') }} <a
+                    href="https://mariowhowrites.com">MarioWhoWrites</a></p> --}}
         </div>
     </div>
 </footer>

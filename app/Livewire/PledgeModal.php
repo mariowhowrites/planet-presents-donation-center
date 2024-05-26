@@ -44,6 +44,8 @@ class PledgeModal extends Component
             'amount' => $this->shouldShowAmountInput() ? $this->amount : $this->tierAmount(),
         ]);
         
+        // instead of redirecting, let's kick this back to JS so we can open in new tab
+
         redirect($this->charity->donation_url);
     }
 

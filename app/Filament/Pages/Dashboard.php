@@ -15,9 +15,7 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Pages\Dashboard as FilamentDashboard;
-use Filament\Pages\Page;
 use Filament\Support\Exceptions\Halt;
-use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\On;
 
 class Dashboard extends FilamentDashboard implements HasForms
@@ -43,8 +41,6 @@ class Dashboard extends FilamentDashboard implements HasForms
     #[On('wishlist-status-updated-{wishlist.id}')]
     public function updateWishlist($status)
     {
-        Log::info($status);
-
         $this->wishlist->refresh();
         $this->form->fill($this->wishlist->toArray());
 

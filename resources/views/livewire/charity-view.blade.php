@@ -1,9 +1,9 @@
-<section class="flex flex-col items-center gap-4 font-sans max-h-fit w-4/5 mx-auto">
+<article class="flex flex-col items-center gap-4 font-sans max-h-fit w-4/5 mx-auto">
     <div
         class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:grid-rows-2 lg:gap-x-8 lg:px-8">
-        <!-- Product details -->
-        <div class="lg:max-w-lg">
-            <nav aria-label="Breadcrumb">
+        <!-- Charity description -->
+        <section id="charity-description-section" class="lg:max-w-lg">
+            <nav id="charity-view-breadcrumb" aria-label="Breadcrumb">
                 <ol role="list" class="flex items-center space-x-2">
                     <li>
                         <div class="flex items-center text-sm">
@@ -14,7 +14,8 @@
                 </ol>
             </nav>
 
-            <div class="mt-4">
+            <!-- Charity name -->
+            <div id="charity-name" class="mt-4">
                 <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{{ $charity->name }}</h1>
             </div>
 
@@ -25,16 +26,17 @@
                     <p class="text-base text-gray-500">{{ $charity->description }}</p>
                 </div>
             </section>
-        </div>
+        </section>
 
-        <!-- Product image -->
-        <div class="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
+        <!-- Charity image -->
+        <div id="charity-image-section" class="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
             <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg">
                 <img src="{{ $charity->previewImageURL() }}" alt="{{ $charity->name }}"
                     class="h-full w-full object-cover object-center">
             </div>
         </div>
-        <!-- Product form -->
+
+        <!-- Donation Tier Selection -->
         <div class="pt-10 lg:pt-0 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
             <section aria-labelledby="options-heading">
                 <h2 id="options-heading" class="sr-only">{{ __('routes/charity-view.label') }}</h2>
@@ -87,4 +89,4 @@
             </section>
         </div>
     </div>
-</section>
+</article>
