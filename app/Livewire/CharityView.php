@@ -33,7 +33,7 @@ class CharityView extends Component
 
         $this->currentWishlist->refresh();
 
-        $this->dispatch('wishlist-items-changed-' . $this->currentWishlist->id, $this->currentWishlist->itemCount());
+        $this->dispatch('wishlist-items-changed', $this->currentWishlist->item_count);
     }
 
     public function removeFromWishlist(Tier $tier)
@@ -42,7 +42,7 @@ class CharityView extends Component
 
         $this->currentWishlist->refresh();
 
-        $this->dispatch('wishlist-items-changed-' . $this->currentWishlist->id, $this->currentWishlist->itemCount());
+        $this->dispatch('wishlist-items-changed', $this->currentWishlist->item_count);
     }
 
     public function toggleFromWishlist(Tier $tier)

@@ -3,6 +3,7 @@
 namespace App\Models\Traits;
 
 use App\Models\WishlistItem;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 trait HasWishlistItems
 {
@@ -11,8 +12,10 @@ trait HasWishlistItems
         return $this->hasMany(WishlistItem::class);
     }
 
-    public function itemCount()
+    public function itemCount(): Attribute
     {
-        return $this->wishlistItems->count();
+        return Attribute::make(
+            get: fn (null $value) => $this->wishlistItems->count()
+        );
     }
 }

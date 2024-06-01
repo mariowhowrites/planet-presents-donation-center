@@ -60,7 +60,9 @@
                                         'ring-2 ring-indigo-500' => $this->currentWishlist->hasTier($tier),
                                         'shadow-sm hover:shadow-xl' => !$this->currentWishlist->hasTier($tier),
                                     ])
-                                        wire:click="toggleFromWishlist({{ $tier->id }})">
+                                        wire:click="toggleFromWishlist({{ $tier->id }})"
+                                        wire:id="tier-item-{{ $tier->id }}"
+                                        >
                                         <input type="radio" name="size-choice" value="18L" class="sr-only"
                                             aria-labelledby="size-choice-0-label"
                                             aria-describedby="size-choice-0-description">

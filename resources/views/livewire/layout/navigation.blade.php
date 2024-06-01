@@ -3,7 +3,7 @@
 use App\Livewire\Actions\Logout;
 use App\Models\Wishlist;
 
-use function Livewire\Volt\{state};
+use function Livewire\Volt\{computed};
 use function Livewire\Volt\{on};
 
 $logout = function (Logout $logout) {
@@ -12,11 +12,16 @@ $logout = function (Logout $logout) {
     $this->redirect('/', navigate: true);
 };
 
+$wishlist = computed(function () {
+    return Wishlist::current();
+});
+
+
 ?>
 
-<nav x-data="{ open: false }" class="bg-emerald-900 border-b border-gray-100 sticky top-0 z-10">
+<nav x-data="{ open: false }" id="primary-navigation-wrapper" class="bg-emerald-900 border-b border-gray-100 sticky top-0 z-10">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div id="primary-navigation" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -28,15 +33,15 @@ $logout = function (Logout $logout) {
 
                 <!-- Navigation Links -->
                 <div class="hidden gap-2 sm:-my-px sm:ms-10 sm:flex" x-data="{ didIncrement: false }">
-                    <x-nav-link :href="route('my-wishlist')" wire:navigate>
-                        {{ __('Your Wishlist') }}
+                    <x-nav-link :href="route('filament.admin.pages.dashboard')" wire:navigate>
+                        {{ __('Manage Wishlist') }}
                     </x-nav-link>
-                    <livewire:wishlist-item-count-badge />
+                    <livewire:wishlist-item-count-badge :wishlist="$this->wishlist" />
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6 gap-4">
+            <div id="settings-dropdown" class="hidden sm:flex sm:items-center sm:ms-6 gap-4">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
@@ -60,8 +65,8 @@ $logout = function (Logout $logout) {
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('filament.admin.pages.dashboard')">
-                            {{ __('Manage Wishlist') }}
+                        <x-dropdown-link :href="route('my-wishlist')">
+                            {{ __('Your Wishlist') }}
                         </x-dropdown-link>
 
                         @auth
@@ -105,7 +110,7 @@ $logout = function (Logout $logout) {
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
+    <div id="mobile-navigation" :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
