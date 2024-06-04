@@ -36,3 +36,17 @@
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('~font/Poppins-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('~font/Poppins-SemiBoldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+}

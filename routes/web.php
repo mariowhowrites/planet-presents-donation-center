@@ -2,6 +2,7 @@
 
 use App\Livewire\CharityView;
 use App\Livewire\Home;
+use App\Livewire\WishlistEdit;
 use App\Livewire\WishlistView;
 use Illuminate\Support\Facades\Route;
 
@@ -35,5 +36,8 @@ Route::get('charities/{id}', CharityView::class)
 
 Route::get('wishlists/{id}', WishlistView::class)
     ->name('wishlist.show');
+
+Route::get('wishlist-settings', WishlistEdit::class)
+    ->name('wishlist.edit');
 
 require __DIR__.'/auth.php';

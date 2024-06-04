@@ -13,4 +13,19 @@ class Pledge extends Model
     {
         return $this->belongsTo(Wishlist::class);
     }
+
+    public static function countByWishlist(Wishlist $wishlist)
+    {
+        return self::where('wishlist_id', $wishlist->id)->count();
+    }
+
+    public static function totalPledgedByWishlist(Wishlist $wishlist)
+    {
+        return self::where('wishlist_id', $wishlist->id)->sum('amount');
+    }
+
+    public static function mostRecentByWishlist(Wishlist $wishlist)
+    {
+        return self::where('wishlist_id', $wishlist->id)->latest()->first();
+    }
 }

@@ -33,7 +33,7 @@ $wishlist = computed(function () {
 
                 <!-- Navigation Links -->
                 <div class="hidden gap-2 sm:-my-px sm:ms-10 sm:flex" x-data="{ didIncrement: false }">
-                    <x-nav-link :href="route('filament.admin.pages.dashboard')" wire:navigate>
+                    <x-nav-link :href="route('wishlist.edit')" wire:navigate>
                         {{ __('Manage Wishlist') }}
                     </x-nav-link>
                     <livewire:wishlist-item-count-badge :wishlist="$this->wishlist" />
