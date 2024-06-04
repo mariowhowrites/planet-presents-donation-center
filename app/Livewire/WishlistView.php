@@ -47,20 +47,6 @@ class WishlistView extends Component
         return view('livewire.wishlist-view');
     }
 
-    public function publishWishlist()
-    {
-        $this->wishlist->publish();
-
-        $this->wishlist->refresh();
-    }
-
-    public function unpublishWishlist()
-    {
-        $this->wishlist->unpublish();
-
-        $this->wishlist->refresh();
-    }
-
     public function canEditWishlist()
     {
         $is_user_wishlist = auth()->check() && auth()->user()->id == $this->wishlist->user_id;

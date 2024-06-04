@@ -28,6 +28,11 @@ class WishlistEdit extends Component
         return view('livewire.wishlist-edit');
     }
 
+    public function toggleWishlistPublished()
+    {
+        $this->wishlist->isPublic() ? $this->unpublishWishlist() : $this->publishWishlist();
+    }
+
     public function publishWishlist()
     {
         $this->wishlist->publish();

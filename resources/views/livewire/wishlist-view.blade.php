@@ -22,23 +22,11 @@
                 @if ($this->canEditWishlist())
                     <p class="mt-1 leading-8 text-gray-600">Wishlist Status: {{ $wishlist->status->value }}</p>
                     <fieldset id="wishlist-controls" class="flex flex-col items-center gap-2">
-                        @if (!$wishlist->getSelectedCharities()->isEmpty())
-                            @if ($wishlist->isPrivate())
-                                <x-secondary-button
-                                    wire:click="publishWishlist">{{ __('routes/wishlist-view.publish') }}</x-secondary-button>
-                            @else
-                                <x-secondary-button
-                                    wire:click="unpublishWishlist">{{ __('routes/wishlist-view.unpublish') }}</x-secondary-button>
-                            @endif
-                            {{-- <a href="/admin/my-wishlist">
-                            <x-secondary-button>Edit Wishlist</x-secondary-button>
-                        </a> --}}
-                            @if ($wishlist->isPublic())
-                                <x-secondary-button
-                                    x-on:click="navigator.clipboard.writeText('{{ route('wishlist.show', $wishlist->id) }}')">
-                                    {{ __('routes/wishlist-view.copy-wishlist-link') }}
-                                </x-secondary-button>
-                            @endif
+                        @if (!$wishlist->getSelectedCharities()->isEmpty() && $wishlist->isPublic())
+                            <x-secondary-button
+                                x-on:click="navigator.clipboard.writeText('{{ route('wishlist.show', $wishlist->id) }}')">
+                                {{ __('routes/wishlist-view.copy-wishlist-link') }}
+                            </x-secondary-button>
                         @endif
                     </fieldset>
                 @endif
