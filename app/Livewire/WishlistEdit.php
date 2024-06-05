@@ -14,6 +14,8 @@ class WishlistEdit extends Component
     public string $newName = '';
     public string $newDescription = '';
 
+    public string $currentView = 'Analytics';
+
     public function mount($id = null)
     {
         $wishlist = $id ? Wishlist::find($id) : Wishlist::current();
@@ -26,6 +28,11 @@ class WishlistEdit extends Component
     public function render()
     {
         return view('livewire.wishlist-edit');
+    }
+
+    public function changeView($view)
+    {
+        $this->currentView = $view;
     }
 
     public function toggleWishlistPublished()

@@ -14,9 +14,21 @@ class Pledge extends Model
         return $this->belongsTo(Wishlist::class);
     }
 
+    public function tier()
+    {
+        return $this->belongsTo(Tier::class);
+    }
+
     public static function countByWishlist(Wishlist $wishlist)
     {
         return self::where('wishlist_id', $wishlist->id)->count();
+    }
+
+    public static function countByWishlistThisWeek(Wishlist $wishlist)
+    {
+        return self::where('wishlist_id', $wishlist->id)
+            ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
+            ->count();
     }
 
     public static function totalPledgedByWishlist(Wishlist $wishlist)
