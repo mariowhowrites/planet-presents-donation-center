@@ -1,3 +1,11 @@
+@script
+<script>
+    $wire.on('pledge-created', () => {
+        window.open("{{ $charity->donation_url }}", "_blank")
+    });
+</script>
+@endscript
+
 <x-modal name="pledge-modal-{{ $charity->id }}" focusable>
     <section class="p-6">
         <div class="pb-6 grid grid-cols-1 gap-x-2">
@@ -19,31 +27,31 @@
                             <legend class="block text-sm font-medium text-gray-700">Donation Tiers</legend>
             
                             <section class="mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2 cursor-pointer">
-                                @foreach ($wishlist->getSelectedTiersByCharity($charity->id) as $tier)
+                                @foreach ($wishlist->getWishlistItemsByCharity($charity->id) as $item)
                                     <!-- Active: "ring-2 ring-indigo-500" -->
                                     <div @class([
                                         'relative block cursor-pointer rounded-lg bg-slate-100 transition border border-gray-300 p-4 focus:outline-none',
-                                        'ring-2 ring-indigo-500' => $tier_id == $tier->id,
-                                        'shadow-sm hover:shadow-xl' => !$tier_id == $tier->id,
-                                    ]) wire:click="selectTier({{ $tier->id }})">
-                                        <input type="radio" name="tier" value="{{ $tier->id }}" class="sr-only"
+                                        'ring-2 ring-indigo-500' => $item_id == $item->id,
+                                        'shadow-sm hover:shadow-xl' => !$item_id == $item->id,
+                                    ]) wire:click="selectTier({{ $item->id }})">
+                                        <input type="radio" name="tier" value="{{ $item->id }}" class="sr-only"
                                             aria-labelledby="size-choice-0-label" aria-describedby="size-choice-0-description">
                                         <div class="flex justify-between">
                                             <p id="size-choice-0-label" class="text-base font-medium text-gray-900">
-                                                {{ $tier->name }}</p>
+                                                {{ $item->tier->name }}</p>
                                             <span class="text-xs" wire:loading.delay
-                                                wire:target="selectTier({{ $tier->id }})">Updating your
+                                                wire:target="selectTier({{ $item->id }})">Updating your
                                                 wishlist...</span>
                                         </div>
                                         <p id="size-choice-0-description" class="mt-1 text-sm text-gray-500">
-                                            {{ $tier->description }}</p>
+                                            {{ $item->tier->description }}</p>
                                         <!--
                           Active: "border", Not Active: "border-2"
                           Checked: "border-indigo-500", Not Checked: "border-transparent"
                         -->
                                         <div @class([
                                             'pointer-events-none absolute -inset-px rounded-lg active:border border-2',
-                                            'border-indigo-500' => $tier_id == $tier->id,
+                                            'border-indigo-500' => $item_id == $item->id,
                                         ]) aria-hidden="true"></div>
                                     </div>
                                 @endforeach

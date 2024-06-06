@@ -2,8 +2,8 @@
 
 namespace App\Livewire;
 
-use App\Models\Pledge;
-use Illuminate\Support\Facades\Log;
+use App\Models\WishlistItem;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 class PledgeModal extends Component
@@ -15,17 +15,17 @@ class PledgeModal extends Component
     // state
     public $name;
     public $message;
-    public $tier_id;
+    public $item_id;
     public $amount = 0;
 
     protected $rules = [
         'name' => 'required',
-        'tier_id' => 'required',
+        'item_id' => 'required',
     ];
     
     public function mount()
     {
-        $this->tier_id = $this->wishlist->getSelectedTiersByCharity($this->charity->id)->first()->id;
+        $this->item_id = $this->wishlist->getWishlistItemsByCharity($this->charity->id)->first()->id;
     }
 
     public function render()
@@ -33,36 +33,38 @@ class PledgeModal extends Component
         return view('livewire.pledge-modal');
     }
 
+    #[Computed]
+    public function wishlistItem()
+    {
+        return WishlistItem::firstWhere('id', $this->item_id);
+    }
+
     public function createPledge()
     {
         $this->validate();
 
-        $this->wishlist->createPledge([
+        $this->wishlistItem->createPledge([
             'name' => $this->name,
             'message' => $this->message,
-            'tier_id' => $this->tier_id,
             'amount' => $this->shouldShowAmountInput() ? $this->amount : $this->tierAmount(),
         ]);
         
-        // instead of redirecting, let's kick this back to JS so we can open in new tab
 
-        redirect($this->charity->donation_url);
+        redirect(route('thank-you', ['charity' => $this->charity->id]));
     }
 
     public function shouldShowAmountInput()
     {
-        $selected_tier = $this->charity->tiers->firstWhere('id', $this->tier_id);
-
-        return $selected_tier->amount === 0;
+        return $this->wishlistItem->tier->amount === 0;
     }
 
     public function tierAmount()
     {
-        return $this->charity->tiers->firstWhere('id', $this->tier_id)->amount;
+        return $this->wishlistItem->tier->amount;
     }
 
-    public function selectTier($tier_id)
+    public function selectTier($item_id)
     {
-        $this->tier_id = $tier_id;
+        $this->item_id = $item_id;
     }
 }

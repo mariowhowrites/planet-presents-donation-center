@@ -2,6 +2,8 @@
 
 use App\Livewire\CharityView;
 use App\Livewire\Home;
+use App\Livewire\WishlistEdit;
+use App\Livewire\ThankYouPage;
 use App\Livewire\WishlistView;
 use Illuminate\Support\Facades\Route;
 
@@ -35,5 +37,10 @@ Route::get('charities/{id}', CharityView::class)
 
 Route::get('wishlists/{id}', WishlistView::class)
     ->name('wishlist.show');
+
+Route::get('wishlist-settings', WishlistEdit::class)
+    ->name('wishlist.edit');
+    
+Route::get('thank-you', ThankYouPage::class)->name('thank-you');
 
 require __DIR__.'/auth.php';
