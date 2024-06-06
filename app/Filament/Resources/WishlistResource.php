@@ -50,7 +50,8 @@ class WishlistResource extends Resource
                 TextColumn::make('name'),
                 TextColumn::make('description'),
                 TextColumn::make('user.name')->default('Anonymous'),
-                TextColumn::make('pledges_count')->counts('pledges'),
+                // TODO: Figure out a way to show how well a wishlist is doing
+                // TextColumn::make('pledges_count')->counts('wishlistItems.pledges'),
                 TextColumn::make('status'),
             ])
             ->filters([

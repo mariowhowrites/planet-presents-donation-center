@@ -9,35 +9,35 @@ class Pledge extends Model
 {
     use HasFactory;
 
-    public function wishlist()
+    public function wishlistItem()
     {
-        return $this->belongsTo(Wishlist::class);
+        return $this->belongsTo(WishlistItem::class);
     }
 
-    public function tier()
+    public static function byWishlist(Wishlist $wishlist)
     {
-        return $this->belongsTo(Tier::class);
+        return self::whereIn('wishlist_item_id', $wishlist->itemIDs());
     }
 
     public static function countByWishlist(Wishlist $wishlist)
     {
-        return self::where('wishlist_id', $wishlist->id)->count();
+        return self::whereIn('wishlist_item_id', $wishlist->itemIDs())->count();
     }
 
     public static function countByWishlistThisWeek(Wishlist $wishlist)
     {
-        return self::where('wishlist_id', $wishlist->id)
+        return self::whereIn('wishlist_item_id', $wishlist->itemIDs())
             ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
             ->count();
     }
 
     public static function totalPledgedByWishlist(Wishlist $wishlist)
     {
-        return self::where('wishlist_id', $wishlist->id)->sum('amount');
+        return self::whereIn('wishlist_item_id', $wishlist->itemIds())->sum('amount');
     }
 
     public static function mostRecentByWishlist(Wishlist $wishlist)
     {
-        return self::where('wishlist_id', $wishlist->id)->latest()->first();
+        return self::whereIn('wishlist_item_id', $wishlist->itemIDs())->latest()->first();
     }
 }

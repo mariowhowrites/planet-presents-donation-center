@@ -18,14 +18,13 @@ trait HasPledges
         return $this->pledges()->create([
             'name' => $attributes['name'],
             'message' => $attributes['message'],
-            'tier_id' => $attributes['tier_id'],
-            'amount' => $this->getPledgeAmount($attributes['amount'], $attributes['tier_id']),
+            'amount' => $this->getPledgeAmount($attributes['amount']),
         ]);
     }
 
     // this should either be amount value if provided. otherwise, default to tier amount
-    protected function getPledgeAmount($amount, $tier_id)
+    protected function getPledgeAmount($amount)
     {
-        return $amount > 0 ? $amount : Tier::find($tier_id)->amount;
+        return $amount > 0 ? $amount : $this->tier->amount;
     }
 }

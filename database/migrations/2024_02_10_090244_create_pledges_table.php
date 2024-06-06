@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('pledges', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tier_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('wishlist_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('wishlist_item_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->text('message')->nullable();
             $table->unsignedFloat('amount')->nullable();

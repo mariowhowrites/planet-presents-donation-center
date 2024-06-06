@@ -26,6 +26,7 @@ class ProdSetup extends Command
      */
     public function handle()
     {
-        Artisan::call('migrate --force');
+        Artisan::call('migrate:refresh --force');
+        Artisan::call('db:seed');
     }
 }
