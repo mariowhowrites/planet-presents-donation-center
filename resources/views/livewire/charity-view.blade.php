@@ -60,8 +60,11 @@
                                         'ring-2 ring-indigo-500' => $this->currentWishlist->hasTier($tier),
                                         'shadow-sm hover:shadow-xl' => !$this->currentWishlist->hasTier($tier),
                                     ])
+                                        role="button"
+                                        tabindex="0"
                                         wire:key="tier-{{ $tier->id }}"
                                         wire:click="toggleFromWishlist({{ $tier->id }})"
+                                        id="tier-button-{{ $tier->id }}"
                                         >
                                         <input type="radio" name="size-choice" value="18L" class="sr-only"
                                             aria-labelledby="size-choice-0-label"
@@ -72,7 +75,7 @@
                                             <span class="text-xs" wire:loading.delay
                                                 wire:target="toggleFromWishlist({{ $tier->id }})">{{ __('routes/charity-view.updating-wishlist') }}</span>
                                         </div>
-                                        <p id="size-choice-0-description" class="mt-1 text-sm text-gray-500">
+                                        <p id="size-choice-0-description" class="mt-1 text-sm text-start text-gray-500">
                                             {{ $tier->description }}</p>
                                         <!--
                           Active: "border", Not Active: "border-2"

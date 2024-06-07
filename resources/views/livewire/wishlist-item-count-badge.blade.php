@@ -19,7 +19,7 @@ on(['wishlist-items-changed' => function ($count) {
 
 ?>
 
-<div class="shrink-0 flex items-center transition" x-data="{ didIncrement: false, animationTimeout: null }">
+<div id="wishlist-item-count-badge" class="shrink-0 flex items-center transition" x-data="{ didIncrement: false, animationTimeout: null }">
     <span
         x-on:wishlist-items-changed.window="clearTimeout(animationTimeout); didIncrement = true; animationTimeout = setTimeout(() => didIncrement = false, 2000)"
         :class="{ 'animate-hi-there': didIncrement }">
