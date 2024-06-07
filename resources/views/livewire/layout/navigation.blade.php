@@ -124,7 +124,7 @@ $wishlist = computed(function () {
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('filament.admin.pages.dashboard')" wire:navigate>
+                <x-responsive-nav-link :href="route('wishlist.edit')" wire:navigate>
                     {{ __('Manage Wishlist') }}
                 </x-responsive-nav-link>
                 @auth
