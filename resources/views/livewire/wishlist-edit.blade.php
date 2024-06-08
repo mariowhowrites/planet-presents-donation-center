@@ -8,7 +8,7 @@
 </x-slot:meta_tags> --}}
 
 
-<div class="bg-white py-12 md:py-24 md:w-3/5 mx-auto">
+<div class="py-12 md:py-24 md:w-3/5 mx-auto">
     <section class="grid gap-2 grid-columns-8">
         {{-- <div class="col-span-full lg:flex lg:items-center lg:justify-between pb-12">
             <div class="min-w-0 flex-1">
