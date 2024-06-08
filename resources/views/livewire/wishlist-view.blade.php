@@ -24,6 +24,7 @@
                     <fieldset id="wishlist-controls" class="flex flex-col items-center gap-2">
                         @if (!$wishlist->getSelectedCharities()->isEmpty() && $wishlist->isPublic())
                             <x-secondary-button
+                                wire:click="showCopyLinkToast()"
                                 x-on:click="navigator.clipboard.writeText('{{ route('wishlist.show', $wishlist->id) }}')">
                                 {{ __('routes/wishlist-view.copy-wishlist-link') }}
                             </x-secondary-button>

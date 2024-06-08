@@ -45,6 +45,8 @@ class WishlistEdit extends Component
         $this->wishlist->publish();
 
         $this->wishlist->refresh();
+
+        $this->showPublishToast();
     }
 
     public function unpublishWishlist()
@@ -52,6 +54,13 @@ class WishlistEdit extends Component
         $this->wishlist->unpublish();
 
         $this->wishlist->refresh();
+
+        $this->showPublishToast();
+    }
+
+    public function showPublishToast()
+    {
+        $this->dispatch('show-toast', $this->wishlist->isPublic() ? 'Wishlist published!' : 'Wishlist unpublished!', type: $this->wishlist->isPublic() ? 'success' : 'warning');
     }
 
     public function publishButtonText()
