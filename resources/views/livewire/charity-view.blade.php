@@ -56,7 +56,7 @@
                                 @foreach ($charity->tiers as $tier)
                                     <!-- Active: "ring-2 ring-indigo-500" -->
                                     <div @class([
-                                        'relative block cursor-pointer rounded-lg bg-slate-100 transition border border-gray-300 p-4 focus:outline-none',
+                                        'relative block cursor-pointer rounded-lg bg-white transition border border-gray-300 p-4 focus:outline-none',
                                         'ring-2 ring-indigo-500' => $this->currentWishlist->hasTier($tier),
                                         'shadow-sm hover:shadow-xl' => !$this->currentWishlist->hasTier($tier),
                                     ])
