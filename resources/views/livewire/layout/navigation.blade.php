@@ -16,10 +16,10 @@ $wishlist = computed(function () {
     return Wishlist::current();
 });
 
-
 ?>
 
-<nav x-data="{ open: false }" id="primary-navigation-wrapper" class="bg-emerald-900 border-b border-gray-100 sticky top-0 z-10">
+<nav x-data="{ open: false }" id="primary-navigation-wrapper"
+    class="bg-emerald-900 border-b border-gray-100 sticky top-0 z-10">
     <!-- Primary Navigation Menu -->
     <div id="primary-navigation" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -70,6 +70,12 @@ $wishlist = computed(function () {
                         </x-dropdown-link>
 
                         @auth
+                            @if (auth()->user()->role === 'admin')
+                                <x-dropdown-link href="/admin" wire:navigate>
+                                    {{ __('Admin Dashboard') }}
+                                </x-dropdown-link>
+                            @endif
+
                             <x-dropdown-link :href="route('profile')" wire:navigate>
                                 {{ __('Profile') }}
                             </x-dropdown-link>
@@ -128,6 +134,12 @@ $wishlist = computed(function () {
                     {{ __('Manage Wishlist') }}
                 </x-responsive-nav-link>
                 @auth
+                    @if (auth()->user()->role === 'admin')
+                        <x-responsive-nav-link href="/admin" wire:navigate>
+                            {{ __('Admin Dashboard') }}
+                        </x-responsive-nav-link>
+                    @endif
+
                     <x-responsive-nav-link :href="route('profile')" wire:navigate>
                         {{ __('Profile') }}
                     </x-responsive-nav-link>
