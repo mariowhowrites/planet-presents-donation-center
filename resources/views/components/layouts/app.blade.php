@@ -28,7 +28,7 @@
             @endif
 
             <!-- Page Content -->
-            <main class="grow flex flex-col bg-slate-200">
+            <main class="grow flex flex-col bg-slate-100">
                 {{ $slot }}
             </main>
             
