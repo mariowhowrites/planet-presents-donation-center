@@ -33,6 +33,8 @@
             </main>
             
             <livewire:layout.footer />
+
+            <livewire:toast />
         </div>
     </body>
 </html>

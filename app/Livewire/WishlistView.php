@@ -60,52 +60,8 @@ class WishlistView extends Component
         $this->dispatch('open-modal', 'pledge-modal');
     }
 
-    public function toggleEditingName()
+    public function showCopyLinkToast()
     {
-        $this->isEditingName = !$this->isEditingName;
-    }
-
-    public function startEditingDescription()
-    {
-        $this->isEditingDescription = true;
-    }
-
-    public function startEditingName()
-    {
-        $this->isEditingName = true;
-    }
-
-    public function stopEditingName()
-    {
-        $validated = $this->validate([
-            'newName' => 'required|string|max:255',
-        ]);
-
-        if ($validated) {
-            $this->wishlist->update([
-                'name' => $validated['newName'],
-            ]);
-
-            $this->wishlist->refresh();
-        }
-
-        $this->isEditingName = false;
-    }
-
-    public function stopEditingDescription()
-    {
-        $validated = $this->validate([
-            'newDescription' => 'required|string',
-        ]);
-
-        if ($validated) {
-            $this->wishlist->update([
-                'description' => $validated['newDescription'],
-            ]);
-            
-            $this->wishlist->refresh();
-        }
-
-        $this->isEditingDescription = false;
+        $this->dispatch('show-toast', 'Link copied to clipboard!', type: 'success');
     }
 }
