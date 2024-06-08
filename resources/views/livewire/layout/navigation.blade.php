@@ -19,7 +19,7 @@ $wishlist = computed(function () {
 ?>
 
 <nav x-data="{ open: false }" id="primary-navigation-wrapper"
-    class="bg-sky-600 border-b border-gray-100 sticky top-0 z-10">
+    class="bg-sky-700 border-b border-gray-100 sticky top-0 z-10">
     <!-- Primary Navigation Menu -->
     <div id="primary-navigation" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">

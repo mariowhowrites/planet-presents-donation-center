@@ -16,7 +16,7 @@ $addEmailSubscriber = function () {
 
 ?>
 
-<footer id="footer-section" class="text-white bg-sky-600" aria-labelledby="footer-heading">
+<footer id="footer-section" class="text-white bg-sky-700" aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
     <div class="mx-auto max-w-7xl px-6 pb-8 pt-20 sm:pt-24 lg:px-8 lg:pt-32">
         <div class="xl:grid xl:grid-cols-3 xl:gap-8">
@@ -27,15 +27,15 @@ $addEmailSubscriber = function () {
                         <ul role="list" class="mt-6 space-y-4">
                             <li>
                                 <a href="{{ route('my-wishlist') }}"
-                                    class="text-sm leading-6 text-gray-300 hover:text-white">{{ __('footer.your_wishlist') }}</a>
+                                    class="text-sm leading-6 text-white hover:text-white">{{ __('footer.your_wishlist') }}</a>
                             </li>
                             <li>
                                 <a href="https://planetpresents.org/about"
-                                    class="text-sm leading-6 text-gray-300 hover:text-white">{{ __('footer.about') }}</a>
+                                    class="text-sm leading-6 text-white hover:text-white">{{ __('footer.about') }}</a>
                             </li>
                             <li>
                                 <a href="https://planetpresents.org/contact"
-                                    class="text-sm leading-6 text-gray-300 hover:text-white">{{ __('footer.contact') }}</a>
+                                    class="text-sm leading-6 text-white hover:text-white">{{ __('footer.contact') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -43,7 +43,7 @@ $addEmailSubscriber = function () {
             </div>
             <div id="footer-email-signup-section" class="mt-10 xl:mt-0">
                 <h3 class="text-sm font-semibold leading-6 text-white">{{ __('footer.subscribe_header') }}</h3>
-                <p class="mt-2 text-sm leading-6 text-slate-300">{{ __('footer.subscribe_description') }}</p>
+                <p class="mt-2 text-sm leading-6 text-white">{{ __('footer.subscribe_description') }}</p>
                 <form wire:submit="addEmailSubscriber" class="mt-6 sm:flex sm:max-w-md">
                     <label for="email-address" class="sr-only">{{ __('footer.email_address') }}</label>
                     <input wire:model="form.email" type="email" name="email-address" id="email-address"
@@ -55,10 +55,10 @@ $addEmailSubscriber = function () {
                     @enderror
                     <div class="mt-4 sm:ml-4 sm:mt-0 sm:flex-shrink-0">
                         <button type="submit"
-                            class="flex w-full items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ __('footer.subscribe_button') }}</button>
+                            class="flex w-full items-center justify-center rounded-md bg-slate-100 px-3 py-2 text-sm font-semibold text-black shadow-sm hover:bg-slate-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ __('footer.subscribe_button') }}</button>
                     </div>
                 </form>
-                <x-action-message class="mt-4 text-gray-100 font-bold" on="email-subscriber-added">
+                <x-action-message class="mt-4 text-white font-bold" on="email-subscriber-added">
                     {{ __('Signed up successfully! Please check your email to confirm.˝') }}
                 </x-action-message>
             </div>
@@ -66,7 +66,7 @@ $addEmailSubscriber = function () {
         <div id="footer-social-links-section"
             class="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 md:flex md:items-center md:justify-between lg:mt-24">
             <div class="flex space-x-6 md:order-2">
-                <a href="#" class="text-gray-200 hover:text-gray-300">
+                <a href="#" class="text-white hover:text-gray-300">
                     <span class="sr-only">Facebook</span>
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path fill-rule="evenodd"
@@ -74,7 +74,7 @@ $addEmailSubscriber = function () {
                             clip-rule="evenodd" />
                     </svg>
                 </a>
-                <a href="https://www.instagram.com/planetpresentsofficial" class="text-gray-200 hover:text-gray-300">
+                <a href="https://www.instagram.com/planetpresentsofficial" class="text-white hover:text-gray-300">
                     <span class="sr-only">Instagram</span>
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path fill-rule="evenodd"
@@ -83,7 +83,7 @@ $addEmailSubscriber = function () {
                     </svg>
                 </a>
                 <a href="https://github.com/mariowhowrites/planet-presents-donation-center"
-                    class="text-gray-200 hover:text-gray-300">
+                    class="text-white hover:text-gray-300">
                     <span class="sr-only">GitHub</span>
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path fill-rule="evenodd"
