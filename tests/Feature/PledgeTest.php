@@ -20,7 +20,7 @@ class PledgeTest extends TestCase
     public function test_that_creating_pledges_sends_email_notifications()
     {
         Notification::fake();
-    
+
         $wishlist = Wishlist::factory()->withUser()->create();
 
         $charity = Charity::factory()->create();
