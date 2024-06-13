@@ -15,12 +15,6 @@ class WishlistView extends Component
 
     public Wishlist $wishlist;
 
-    public bool $isEditingName = false;
-    public bool $isEditingDescription = false; 
-    public string $newName = '';
-    public string $newDescription = '';
-
-
     public function mount($id = null)
     {
         $wishlist = $id ? Wishlist::find($id) : Wishlist::current();
@@ -38,8 +32,6 @@ class WishlistView extends Component
         }
 
         $this->wishlist = $wishlist;
-        $this->newName = $wishlist->name;
-        $this->newDescription = $wishlist->description;
     }
 
     public function render()

@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
+use App\Events\PledgeCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Pledge extends Model
 {
     use HasFactory;
+
+    protected $dispatchesEvents = [
+        'created' => PledgeCreated::class,
+    ];
 
     public function wishlistItem()
     {

@@ -48,7 +48,6 @@ class PledgeModal extends Component
             'message' => $this->message,
             'amount' => $this->shouldShowAmountInput() ? $this->amount : $this->tierAmount(),
         ]);
-        
 
         redirect(route('thank-you', ['charity' => $this->charity->id]));
     }
