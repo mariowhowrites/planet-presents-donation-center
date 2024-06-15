@@ -41,16 +41,16 @@
                                         'shadow-sm hover:shadow-xl' => !$item_id == $item->id,
                                     ]) wire:click="selectTier({{ $item->id }})">
                                         <input type="radio" name="tier" value="{{ $item->id }}" class="sr-only"
-                                            aria-labelledby="size-choice-0-label"
-                                            aria-describedby="size-choice-0-description">
+                                            aria-labelledby="item-choice-{{ $item->id }}-label"
+                                            aria-describedby="item-choice-{{ $item->id }}-description">
                                         <div class="flex justify-between">
-                                            <p id="size-choice-0-label" class="text-base font-medium text-gray-900">
+                                            <p id="item-choice-{{ $item->id }}-label" class="text-base font-medium text-gray-900">
                                                 {{ $item->tier->name }}</p>
                                             <span class="text-xs" wire:loading.delay
                                                 wire:target="selectTier({{ $item->id }})">Updating your
                                                 wishlist...</span>
                                         </div>
-                                        <p id="size-choice-0-description" class="mt-1 text-sm text-gray-500">
+                                        <p id="item-choice-{{ $item->id }}-description" class="mt-1 text-sm text-gray-500">
                                             {{ $item->tier->description }}</p>
                                         <!--
                           Active: "border", Not Active: "border-2"
