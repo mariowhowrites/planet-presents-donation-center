@@ -71,7 +71,7 @@ $wishlist = computed(function () {
 
                         @auth
                             @if (auth()->user()->role === 'admin')
-                                <x-dropdown-link href="/admin" wire:navigate>
+                                <x-dropdown-link :href="\App\Filament\Resources\CharityResource::getUrl()">
                                     {{ __('Admin Dashboard') }}
                                 </x-dropdown-link>
                             @endif
@@ -135,7 +135,7 @@ $wishlist = computed(function () {
                 </x-responsive-nav-link>
                 @auth
                     @if (auth()->user()->role === 'admin')
-                        <x-responsive-nav-link href="/admin" wire:navigate>
+                        <x-responsive-nav-link :href="\App\Filament\Resources\CharityResource::getUrl()">
                             {{ __('Admin Dashboard') }}
                         </x-responsive-nav-link>
                     @endif
