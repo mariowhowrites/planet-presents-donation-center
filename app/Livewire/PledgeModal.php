@@ -26,7 +26,10 @@ class PledgeModal extends Component
     
     public function mount()
     {
-        $this->item_id = $this->wishlist->getWishlistItemsByCharity($this->charity->id)->first()->id;
+        $defaultItem = $this->wishlist->getWishlistItemsByCharity($this->charity->id)->first();
+
+        $this->item_id = $defaultItem->id;
+        $this->amount = $defaultItem->tier->amount;
     }
 
     public function render()
