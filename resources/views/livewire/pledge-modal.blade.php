@@ -64,6 +64,9 @@
                             <x-input-label for="amount" value="{{ __('Amount') }}" />
                             <x-text-input wire:model="amount" id="amount" name="amount" type="number"
                                 class="mt-1 block w-3/4" placeholder="{{ __('Amount') }}" />
+                            @error('amount')
+                                <x-input-error :messages="$errors->get('amount')" class="mt-2" />
+                            @enderror
                         </div>
                     @endif
 

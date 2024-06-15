@@ -21,6 +21,7 @@ class PledgeModal extends Component
     protected $rules = [
         'name' => 'required',
         'item_id' => 'required',
+        'amount' => 'required|numeric|min:1',
     ];
     
     public function mount()
