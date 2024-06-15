@@ -21,11 +21,15 @@ class PledgeModal extends Component
     protected $rules = [
         'name' => 'required',
         'item_id' => 'required',
+        'amount' => 'required|numeric|min:1',
     ];
     
     public function mount()
     {
-        $this->item_id = $this->wishlist->getWishlistItemsByCharity($this->charity->id)->first()->id;
+        $defaultItem = $this->wishlist->getWishlistItemsByCharity($this->charity->id)->first();
+
+        $this->item_id = $defaultItem->id;
+        $this->amount = $defaultItem->tier->amount;
     }
 
     public function render()
