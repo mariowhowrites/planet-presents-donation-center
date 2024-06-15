@@ -27,12 +27,13 @@ mount(function () {
                         <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col"
-                                    class="hidden sm:table-cell py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Description
+                                    class="hidden sm:table-cell py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                    Description
                                 </th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                     Name</th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                    Charity</th>
+                                    Actions</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
@@ -50,7 +51,9 @@ mount(function () {
                                         </span>
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        Edit</td>
+                                        <a wire:navigate class="text-blue-700 hover:text-blue-600 font-bold"
+                                            href="{{ route('charity.show', $item->tier->charity) }}">Edit</a>
+                                    </td>
                                     {{-- <td
                                         class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                         <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span
