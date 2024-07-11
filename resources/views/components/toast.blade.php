@@ -21,7 +21,7 @@ on([
 
 <div @class([
     'fixed bottom-0 right-0 rounded-md p-4 mr-4 mb-4',
-    'bg-green-50' => $this->type === 'success',
+    'bg-green-100' => $this->type === 'success',
     'bg-red-50' => $this->type === 'error',
     'bg-yellow-50' => $this->type === 'warning',
 ]) style="display: {{ $this->show ? 'block' : 'none' }}">
