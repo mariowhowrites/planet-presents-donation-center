@@ -18,8 +18,7 @@ $wishlist = computed(function () {
 
 ?>
 
-<nav x-data="{ open: false }" id="primary-navigation-wrapper"
-    class="bg-sky-700 border-b border-gray-100 sticky top-0 z-10">
+<nav x-data="{ open: false }" id="primary-navigation-wrapper" class="bg-sky-700 border-b border-gray-100 sticky top-0 z-10">
     <!-- Primary Navigation Menu -->
     <div id="primary-navigation" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -40,36 +39,30 @@ $wishlist = computed(function () {
                 </div>
             </div>
 
-            <!-- Settings Dropdown -->
-            <div id="settings-dropdown" class="hidden sm:flex sm:items-center sm:ms-6 gap-4">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            @auth
+            @auth
+                <!-- Settings Dropdown -->
+                <div id="settings-dropdown" class="hidden sm:flex sm:items-center sm:ms-6 gap-4">
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <button
+                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                 <div x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"
                                     x-on:profile-updated.window="name = $event.detail.name"></div>
-                            @else
-                                <div>{{ __('Guest') }}</div>
-                            @endauth
+                                <div class="ms-1">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </x-slot>
 
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('my-wishlist')">
-                            {{ __('Your Wishlist') }}
-                        </x-dropdown-link>
-
-                        @auth
+                        <x-slot name="content">
+                            <x-dropdown-link :href="route('my-wishlist')">
+                                {{ __('Your Wishlist') }}
+                            </x-dropdown-link>
                             @if (auth()->user()->role === 'admin')
                                 <x-dropdown-link :href="\App\Filament\Resources\CharityResource::getUrl()">
                                     {{ __('Admin Dashboard') }}
@@ -86,17 +79,19 @@ $wishlist = computed(function () {
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </button>
-                        @else
-                            <x-dropdown-link :href="route('login')" wire:navigate>
-                                {{ __('Log In') }}
-                            </x-dropdown-link>
-                            <x-dropdown-link :href="route('register')" wire:navigate>
-                                {{ __('Register') }}
-                            </x-dropdown-link>
-                        @endauth
-                    </x-slot>
-                </x-dropdown>
-            </div>
+                        </x-slot>
+                    </x-dropdown>
+                </div>
+            @else
+                <div class="hidden sm:flex sm:items-center sm:ms-6 gap-4">
+                    <x-nav-link :href="route('login')" wire:navigate>
+                        {{ __('Log In') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('register')" wire:navigate>
+                        {{ __('Register') }}
+                    </x-nav-link>
+                </div>
+            @endauth
 
             <!-- Hamburger -->
             <div class="-me-2 flex gap-2 items-center sm:hidden" x-data="{ didIncrement: false }">
