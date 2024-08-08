@@ -7,7 +7,7 @@
 
         <title>{{ config('app.name', 'Planet Presents Donation Center') }}</title>
 
-        <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon" />
+        <link rel="icon" href="{{ asset('planetpresents-favicon.png') }}" type="image/x-icon" />
 
         {{ $meta_tags ?? '' }}
 

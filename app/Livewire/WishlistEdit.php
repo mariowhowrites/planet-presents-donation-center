@@ -67,4 +67,9 @@ class WishlistEdit extends Component
     {
         return $this->wishlist->isPublic() ? 'Unpublish' : 'Publish';
     }
+
+    public function showCopyLinkToast()
+    {
+        $this->dispatch('show-toast', 'Link copied to clipboard!', type: 'success');
+    }
 }

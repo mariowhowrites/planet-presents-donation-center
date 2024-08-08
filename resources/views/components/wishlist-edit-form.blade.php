@@ -40,12 +40,12 @@ $saveWishlistChanges = function () {
                     <label for="website" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
                     <div class="mt-2">
                         <div @class([
-                            'flex rounded-md shadow-sm ring-1 ring-inset focus-within:ring-2 focus-within:ring-inset sm:max-w-md',
-                            'ring-gray-300 focus-within:ring-indigo-600' => !$errors->has('name'),
+                            'flex rounded-md shadow-sm ring-4 ring-inset focus-within:ring-2 focus-within:ring-inset sm:max-w-md ring-gray-300',
+                            'focus-within:ring-indigo-600' => !$errors->has('name'),
                             'ring-red-400 focus-within:ring-red-600' => $errors->has('name'),
                         ])>
                             <input type="text" name="name" id="name" wire:model="name"
-                                class="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
+                                class="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 bg-white">
                         </div>
                     </div>
                     @error('name')

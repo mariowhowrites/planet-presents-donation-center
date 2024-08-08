@@ -73,6 +73,7 @@
                     ])>Settings</button>
                     {{-- <a href="#" class="text-gray-700">All-time</a> --}}
                 </div>
+
                 <span class="ml-auto hidden sm:block">
                     <a href="{{ route('wishlist.show', $wishlist->id) }}"
                         class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
@@ -86,6 +87,14 @@
                         View
                     </a>
                 </span>
+
+
+                @if (!$wishlist->getSelectedCharities()->isEmpty() && $wishlist->isPublic())
+                    <x-secondary-button wire:click="showCopyLinkToast()"
+                        x-on:click="navigator.clipboard.writeText('{{ route('wishlist.show', $wishlist->id) }}')">
+                        {{ __('routes/wishlist-view.copy-wishlist-link') }}
+                    </x-secondary-button>
+                @endif
 
                 <button type="button" wire:click="toggleWishlistPublished()"
                     class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
