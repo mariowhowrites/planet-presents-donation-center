@@ -28,6 +28,11 @@
                                 x-on:click="navigator.clipboard.writeText('{{ route('wishlist.show', $wishlist->id) }}')">
                                 {{ __('routes/wishlist-view.copy-wishlist-link') }}
                             </x-secondary-button>
+                            <x-secondary-button
+                                type="link"
+                                href="mailto:?subject=Check out my wishlist on Planet Presents!&body={{ route('wishlist.show', $wishlist->id) }}">
+                                Email Wishlist
+                            </x-secondary-button>
                         @endif
                     </fieldset>
                 @endif
